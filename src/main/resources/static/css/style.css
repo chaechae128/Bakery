@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.logo {
+    height: 70px;
+}
+#logo{
+    font-size: 50px;
+}
+footer{
+    background-color: lemonchiffon;
+    height: 100px;
+}
+#menu{
+    background-color: lemonchiffon;
+    height: 40px;
+}
+
+.search{
+    height: 35px;
+}
