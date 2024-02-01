@@ -23,9 +23,6 @@
 			<jsp:include page="../${viewName}.jsp" />
         </div>
 
-        <footer class="">
-
-
-        </footer>
+        
     </body>
 </html>
