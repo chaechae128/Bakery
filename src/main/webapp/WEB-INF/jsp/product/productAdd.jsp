@@ -81,8 +81,11 @@
 			
 			$.ajax({
 				type:"POST"
-				,url:"/post/add"
+				,url:"/product/add"
 				,data:{"productName":productName, "stock":stock, "costPrice":costPrice, "sellingPrice":sellingPrice, "category":category, "file":$("#file")[0].files[0]}
+				,enctype:"multipart/form-data"
+				,processData:false
+				,contentType:false
 				,success:function(data){
 					if(data.code == 200){
 						alert("상품 등록이 완료되었습니다");
