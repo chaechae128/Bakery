@@ -14,7 +14,7 @@ public class Product {
 	private int stock;
 	private int costPrice;
 	private int sellingPrice;
-	private String catagory;
+	private String category;
 	private Date createdAt;
 	private Date updatedAt;
 }

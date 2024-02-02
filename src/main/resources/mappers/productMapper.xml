@@ -28,4 +28,53 @@
  			
  		)
  	</insert>
+ 	
+ 	<select id="selectProduct" resultType="com.bakery.product.domain.Product">
+ 		SELECT
+ 			`id`
+ 			,`productName`
+			,`imagePath`
+			,`stock`
+			,`costPrice`
+			,`sellingPrice`
+			,`category`
+		FROM
+			`product`
+ 			
+ 	</select>
+ 	
+ 	<select id="selectProductById" parameterType="int" resultType="com.bakery.product.domain.Product">
+ 		SELECT
+ 			`id`
+ 			,`productName`
+			,`imagePath`
+			,`stock`
+			,`costPrice`
+			,`sellingPrice`
+			,`category`
+		FROM
+			`product`
+		WHERE
+			`id` = #{productId}
+ 	</select>
+ 	
+ 	<update id="updateProductByProductId" parameterType="map">
+ 		UPDATE `product`
+   		SET
+   			`productName` = #{productName}
+			,`imagePath` = #{imagePath}
+			,`stock` = #{stock}
+			,`costPrice` = #{costPrice}
+			,`sellingPrice` = #{sellingPrice}
+			,`category` = #{category}
+			,`updatedAt` = NOW()
+		WHERE
+			`id` = #{productId}
+ 	</update>
+ 	
+ 	<delete id="deleteProductByProductId" parameterType="int">
+ 		DELETE FROM `product`
+ 		WHERE
+ 			`id` = #{productId}
+ 	</delete>
  </mapper>
