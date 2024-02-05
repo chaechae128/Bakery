@@ -3,7 +3,7 @@
 
 
 <div class="d-flex justify-content-center align-items-end logo">
-	<h1 class="font-weight-bold" id="logo">Bakery</h1>
+	<a href="/bakery/home-view" class="font-weight-bold" id="logo">Bakery</a>
 </div>
 <div class="p-2 d-flex justify-content-end">
 	<div class="ml-2">김채연님 환영합니다~</div>

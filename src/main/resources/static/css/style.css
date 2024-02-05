@@ -1,9 +1,11 @@
 @charset "UTF-8";
 .logo {
     height: 70px;
+    
 }
 #logo{
     font-size: 50px;
+    color:black;
 }
 footer{
     background-color: lemonchiffon;
