@@ -27,4 +27,8 @@ public interface UserMapper {
 	public List<User> selectUserList();
 	
 	public List<User> selectUserByName(String name);
+	
+	public User selectUserByLoginIdPassword(
+			@Param("loginId")String loginId, 
+			@Param("password")String password);
 }

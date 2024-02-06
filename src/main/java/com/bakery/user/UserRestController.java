@@ -14,6 +14,9 @@ import com.bakery.common.EncryptUtils;
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/user")
 @RestController
 public class UserRestController {
@@ -43,6 +46,18 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 회원가입 API
+	 * @param loginId
+	 * @param password
+	 * @param name
+	 * @param email
+	 * @param phoneNumber
+	 * @param postCode
+	 * @param address
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	@RequestMapping("/sign-up")
 	public Map<String, Object> signUp(
 			@RequestParam("loginId") String loginId,
@@ -68,6 +83,39 @@ public class UserRestController {
 		}
 		return result;
 	}
+	/**
+	 * 로그인API
+	 * @param loginId
+	 * @param password
+	 * @param request
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
+	@RequestMapping("/sign-in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("password") String password,
+			HttpServletRequest request) throws NoSuchAlgorithmException{
+		
+		String hashedPassword = EncryptUtils.sha256(password);
+		User user = userBO.selectUserByLoginIdPassword(loginId, hashedPassword);
+		Map<String, Object> result = new HashMap<>();
+		
+		if(user != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 300);
+			result.put("error_message", "존재하지 않는 사용자 입니다.");
+		}
+		
+		return result;
+	}
+	
 	
 	@RequestMapping("/searchUser")
 	public Map<String, Object> searchUser(
@@ -85,8 +133,6 @@ public class UserRestController {
 			result.put("code", 500);
 			result.put("result", "실패");
 		}
-		
-		
 		return result;
 	}
 }

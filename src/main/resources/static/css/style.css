@@ -25,3 +25,6 @@ footer{
 #signIn{
 	margin-left: 250px;
 }
+#content{
+	min-height: 500px
+}

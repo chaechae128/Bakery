@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-center">
             <div id="signIn" class="col-5">
                 <h2>회원가입</h2>
-                <form id="loginForm" action="/user/sign-up" method="post">
+                <form id="signUpForm" action="/user/sign-up" method="post">
                     <!--아이디-->
                     <div class="my-2">
                         <div class="mb-2">아이디</div>

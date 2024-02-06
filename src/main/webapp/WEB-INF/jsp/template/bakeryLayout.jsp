@@ -19,7 +19,7 @@
             <jsp:include page="../include/bakeryHeader.jsp" />
         </header>
 
-        <div>
+        <div id="content">
 			<jsp:include page="../${viewName}.jsp" />
         </div>
 
