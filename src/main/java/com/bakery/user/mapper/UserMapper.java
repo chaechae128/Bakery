@@ -1,7 +1,11 @@
 package com.bakery.user.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.bakery.user.domain.User;
 
 @Mapper
 public interface UserMapper {
@@ -18,4 +22,9 @@ public interface UserMapper {
 			@Param("phoneNumber")String phoneNumber, 
 			@Param("postCode")int postCode, 
 			@Param("address")String address);
+	
+	//user List
+	public List<User> selectUserList();
+	
+	public List<User> selectUserByName(String name);
 }

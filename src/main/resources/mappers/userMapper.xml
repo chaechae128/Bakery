@@ -34,9 +34,40 @@
  			,#{address}
  			,NOW()
  			,NOW()
- 			
  		)
- 		
- 		
  	</insert>
+ 	
+ 	<select id="selectUserList" resultType="com.bakery.user.domain.User">
+ 		SELECT 
+ 			`id`
+ 			,`loginId`
+			,`name`
+			,`email`
+			,`phoneNumber`
+			,`postCode`
+			,`address`
+			,`createdAt`
+		FROM
+			`user`
+ 	</select>
+ 	
+ 	
+ 	<select id="selectUserByName" resultType="com.bakery.user.domain.User" parameterType="String">
+ 		SELECT 
+ 			`id`
+ 			,`loginId`
+			,`name`
+			,`email`
+			,`phoneNumber`
+			,`postCode`
+			,`address`
+			,`createdAt`
+		FROM
+			`user`
+		WHERE
+		<![CDATA[
+		`name` like CONCAT('%',#{name},'%')
+        ]]>
+ 		
+ 	</select>
  </mapper>

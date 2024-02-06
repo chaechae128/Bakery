@@ -13,12 +13,5 @@
 			href="/user/user-manage-view" class="btn mx-1">회원관리</a> <a
 			href="/inquiry/inquiry-manage-view" class="btn mx-1">Q & A관리</a>
 	</div>
-	<!--검색-->
-	<div class="d-flex  align-items-center">
-		<input type="text" class="d-flex justify-content-end search">
-		<a href=""><img
-			src="https://img.freepik.com/premium-vector/magnifying-glass-icon-vector-illustration_230920-960.jpg"
-			alt="searchIcon" height="35px"></a>
-	</div>
 </div>
 <hr>

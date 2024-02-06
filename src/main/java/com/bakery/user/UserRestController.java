@@ -2,6 +2,7 @@ package com.bakery.user;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bakery.common.EncryptUtils;
 import com.bakery.user.bo.UserBO;
+import com.bakery.user.domain.User;
 
 @RequestMapping("/user")
 @RestController
@@ -64,8 +66,25 @@ public class UserRestController {
 			result.put("code", 500);
 			result.put("result", "실패");
 		}
-		
-		
+		return result;
+	}
+	
+	@RequestMapping("/searchUser")
+	public Map<String, Object> searchUser(
+			@RequestParam("name") String name){
+		//db select
+		List<User> userListByName = userBO.selectUserByName(name);
+		//응답값
+		Map<String, Object> result = new HashMap<>();
+		if(userListByName != null) {
+			result.put("code", 200);
+			result.put("result", "성공");
+			result.put("userListByName", userListByName);
+		}
+		else {
+			result.put("code", 500);
+			result.put("result", "실패");
+		}
 		
 		
 		return result;

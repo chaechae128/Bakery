@@ -1,9 +1,11 @@
 package com.bakery.user.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bakery.user.domain.User;
 import com.bakery.user.mapper.UserMapper;
 
 @Service
@@ -19,6 +21,16 @@ public class UserBO {
 	//input: 파라미터들 //output:성공한 행 개수
 	public int addUser(String loginId, String password, String name, String email, String phoneNumber, int postCode, String address) {
 		return  userMapper.insertUser(loginId, password, name, email, phoneNumber, postCode, address);
+	}
+	
+	//input:x output:List<User>
+	public List<User> selectUserList() {
+		return userMapper.selectUserList();
+	}
+	
+	//input:name output:List<User>
+	public List<User> selectUserByName(String name){
+		return userMapper.selectUserByName(name);
 	}
 	
 }
