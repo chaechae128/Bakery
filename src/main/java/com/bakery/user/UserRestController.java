@@ -116,7 +116,6 @@ public class UserRestController {
 		return result;
 	}
 	
-	
 	@RequestMapping("/searchUser")
 	public Map<String, Object> searchUser(
 			@RequestParam("name") String name){

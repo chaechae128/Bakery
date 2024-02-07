@@ -42,7 +42,6 @@
 				,data:{"loginId":loginId, "password":password}
 				,success:function(data){
 					if(data.code == 200) {
-						alert("로그인성공");
 						location.href="/bakery/home-view";
 					}else{
 						alert(data.error_message);

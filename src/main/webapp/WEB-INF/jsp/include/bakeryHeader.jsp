@@ -1,14 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
 
 <div class="d-flex justify-content-center align-items-end logo">
 	<a href="/bakery/home-view" class="font-weight-bold" id="logo">Bakery</a>
 </div>
 <div class="p-2 d-flex justify-content-end">
-	<div class="ml-2">김채연님 환영합니다~</div>
-	<a href="/user/sign-up-view" class="ml-2">회원가입</a> <a
-		href="/user/sign-in-view" class="ml-2">로그인</a>
+	<!-- 로그인 시 -->
+	<c:if test="${!empty userName}">
+		<div class="ml-2">${userName}님 환영합니다~</div>
+		<a href="/user/sign-out" class="ml-2">로그아웃</a>
+		<a href="/cart/cart-list-view" class="ml-2">장바구니</a>
+		<a href="/user/user-update-view" class="ml-2">마이페이지</a>
+	</c:if>
+	<!-- 로그인 아닐 경우  -->
+	<c:if test="${empty userName}">
+		<a href="/user/sign-up-view" class="ml-2">회원가입</a> 
+		<a href="/user/sign-in-view" class="ml-2">로그인</a>
+	</c:if>
 </div>
 <hr>
 <!-- 상단 bar-->
