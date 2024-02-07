@@ -31,4 +31,9 @@ public interface UserMapper {
 	public User selectUserByLoginIdPassword(
 			@Param("loginId")String loginId, 
 			@Param("password")String password);
+	
+	
+	public User selectUserByEmailName(
+			@Param("email")String email, 
+			@Param("name")String name);
 }

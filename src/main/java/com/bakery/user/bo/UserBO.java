@@ -38,5 +38,10 @@ public class UserBO {
 		return userMapper.selectUserByLoginIdPassword(loginId, password);
 	}
 	
+	//input:email, name output:User
+	public User selectUserByEmailName(String email, String name) {
+		return userMapper.selectUserByEmailName(email, name);
+	}
+	
 	
 }

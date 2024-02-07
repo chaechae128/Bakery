@@ -1,11 +1,14 @@
 package com.bakery.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
@@ -52,6 +55,26 @@ public class UserController {
 		
 		return "redirect:/bakery/home-view";
 	}
+	
+	@RequestMapping("/find-id-view")
+	public String findIdView(Model model) {
+		model.addAttribute("viewName", "/user/findId");
+		return "template/bakeryLayout";
+	}
+	
+	@RequestMapping("/find-id")
+	public String findId(
+			@RequestParam("email") String email,
+			@RequestParam("name") String name,
+			Model model){
+		//db select
+		User user = userBO.selectUserByEmailName(email, name);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("viewName", "/user/completeFindId");
+		return "template/bakeryLayout";
+	}
+	
 	
 	/**
 	 * 관리자- 회원관리 화면

@@ -79,4 +79,14 @@
  			AND
  			`password` = #{password}
  	</select>
+ 	
+ 	<select id="selectUserByEmailName" resultType="com.bakery.user.domain.User" parameterType="map">
+ 		SELECT
+ 			*
+ 		FROM `user`
+ 		WHERE
+ 			`email` = #{email}
+ 			AND
+ 			`name` = #{name}
+ 	</select>
  </mapper>

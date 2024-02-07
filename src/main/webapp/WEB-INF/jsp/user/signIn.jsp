@@ -13,6 +13,11 @@
 			<div class="d-flex justify-content-center">
 				<button class="btn bg-lemon my-4 w-100" id="loginBtn">로그인</button>
 			</div>
+			<div class="d-flex">
+				<a href="/user/sign-up-view" class="ml-2">회원가입</a> 
+				<a href="/user/find-id-view" class="ml-2">아이디 찾기</a> 
+				<a href="/user/find-pw-view" class="ml-2">비밀번호 찾기</a> 
+			</div>
 		</form>
 	</div>
 </div>
