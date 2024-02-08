@@ -116,6 +116,18 @@ public class UserRestController {
 		return result;
 	}
 	
+	@RequestMapping("/reset-pw")
+	public  Map<String, Object> resetPw(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("email") String email,
+			@RequestParam("name") String name) {
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		return result;
+	}
+	
+	
 	@RequestMapping("/searchUser")
 	public Map<String, Object> searchUser(
 			@RequestParam("name") String name){

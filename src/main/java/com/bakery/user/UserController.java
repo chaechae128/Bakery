@@ -1,8 +1,6 @@
 package com.bakery.user;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +45,11 @@ public class UserController {
 		return "template/bakeryLayout";
 	}
 	
+	/**
+	 * 로그아웃
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/sign-out")
 	public String signOut(HttpSession session) {
 		session.removeAttribute("userId");
@@ -56,12 +59,24 @@ public class UserController {
 		return "redirect:/bakery/home-view";
 	}
 	
+	/**
+	 * 아이디 찾기 화면
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/find-id-view")
 	public String findIdView(Model model) {
 		model.addAttribute("viewName", "/user/findId");
 		return "template/bakeryLayout";
 	}
 	
+	/**
+	 * 아이디 찾기
+	 * @param email
+	 * @param name
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/find-id")
 	public String findId(
 			@RequestParam("email") String email,
@@ -75,6 +90,14 @@ public class UserController {
 		return "template/bakeryLayout";
 	}
 	
+	
+	@RequestMapping("/find-password-view")
+	public String findPasswordView(Model model) {
+		model.addAttribute("viewName", "/user/findPassword");
+		return "template/bakeryLayout";
+	}
+	
+
 	
 	/**
 	 * 관리자- 회원관리 화면
