@@ -24,12 +24,12 @@
 <div class="d-flex justify-content-center" id="menu">
 	<!--메뉴-->
 	<div class="col-9 d-flex justify-content-around ">
-		<a href="/product/product-all-list-view" class="btn mx-1">전체</a> <a
-			href="/product/product-best-list-view" class="btn mx-1">베스트</a> <a
-			href="/product/product-new-list-view" class="btn mx-1">NEW</a> <a
-			href="/product/product-cake-list-view" class="btn mx-1">케이크</a> <a
-			href="/product/product-cookie-list-view" class="btn mx-1">쿠키</a> <a
-			href="/product/product-bread-list-view" class="btn mx-1">빵</a>
+		<button id="Allbtn" class="btn mx-1" value="All">전체</button>
+		<button id="Bestbtn" class="btn mx-1">베스트</button>
+		<button id="Newbtn" class="btn mx-1">NEW</button>
+		<button id="Cakebtn" class="btn mx-1">케이크</button>
+		<button id="Cookiebtn" class="btn mx-1">쿠키</button>
+		<button id="Breadbtn" class="btn mx-1">빵</button>
 	</div>
 	<!--검색-->
 	<div class="d-flex  align-items-center">
@@ -40,3 +40,29 @@
 	</div>
 </div>
 <hr>
+
+<script>
+	$(document).ready(function(){
+		$("#Allbtn").on('click', function(){
+			let menu=$(this).val();
+			//console.log(value);
+			
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"menu":menu}		
+				,success:function(data){
+		               if(data.code == 200){
+		                  location.href="/product/product-"+data.menu+"-list";
+		               }else{
+		            	   alert(data.error_message);
+		               }
+		            }
+		            ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		            }
+			});//ajax
+			
+		});//Allbtn
+	});//ready
+</script>

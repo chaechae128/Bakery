@@ -77,4 +77,8 @@
  		WHERE
  			`id` = #{productId}
  	</delete>
+ 	
+ 	<select id="selectAll" resultType="com.bakery.product.domain.Product">
+ 		SELECT * FROM `product`
+ 	</select>
  </mapper>
