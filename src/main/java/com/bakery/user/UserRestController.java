@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bakery.certification.bo.MailBO;
 import com.bakery.common.EncryptUtils;
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
@@ -23,6 +24,8 @@ public class UserRestController {
 	@Autowired
 	private UserBO userBO;
 	
+	@Autowired
+	private MailBO mailBO;
 
 	/**
 	 * 아이디 중복확인 API
@@ -146,4 +149,40 @@ public class UserRestController {
 		}
 		return result;
 	}
+	
+	
+	
+	@RequestMapping("find-password")
+	public Map<String, Object> findPassword(
+			@RequestParam("email")String email,
+			@RequestParam("name") String name) {
+		
+		User user = userBO.selectUserByEmailName(email, name);
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		if (user == null) {
+			result.put("code", 500);
+			result.put("error_message", "비밀번호 찾기에 실패했습니다.");
+		} else {
+			userBO.sendEmail(user);
+			result.put("code", 200);
+			result.put("result", "성공");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/check-certificationCode")
+	public Map<String, Object> checkCertificationCode(
+			@RequestParam("code") String code){
+		//인증번호가 db에 있는지 확인
+		
+		//확인 후 응답 값
+		Map<String, Object> result = new HashMap<>();
+		//확인 된 인증번호 db에서 delete
+		
+		
+		return result;
+	}
+	
 }

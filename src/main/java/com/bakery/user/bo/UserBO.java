@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bakery.certification.bo.MailBO;
+import com.bakery.certification.domain.Mail;
 import com.bakery.user.domain.User;
 import com.bakery.user.mapper.UserMapper;
 
@@ -12,6 +14,9 @@ import com.bakery.user.mapper.UserMapper;
 public class UserBO {
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private MailBO mailBO;
 	//input:  loginId  //output:성공한 행의 개수(count)
 	public int isDuplicatedId(String loginId) {
 		int count = userMapper.isDuplicatedId(loginId); 
@@ -42,6 +47,17 @@ public class UserBO {
 	public User selectUserByEmailName(String email, String name) {
 		return userMapper.selectUserByEmailName(email, name);
 	}
+	
+	
+	
+	public void sendEmail(User user) {
+		String certificationCode = mailBO.getCertificationCode();
+		Mail mail = mailBO.createMailAndChangePassword(user.getEmail(), certificationCode);
+		mailBO.mailSend(mail);
+		mailBO.insertCertificationCode(certificationCode, user.getId());
+		
+	}
+	
 	
 	
 }
