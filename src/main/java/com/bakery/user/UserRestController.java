@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bakery.certification.bo.CertificationBO;
 import com.bakery.certification.bo.MailBO;
+import com.bakery.certification.domain.Certification;
+import com.bakery.certification.domain.Mail;
 import com.bakery.common.EncryptUtils;
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
@@ -26,6 +29,9 @@ public class UserRestController {
 	
 	@Autowired
 	private MailBO mailBO;
+	
+	@Autowired
+	private CertificationBO certificationBO;
 
 	/**
 	 * 아이디 중복확인 API
@@ -155,7 +161,8 @@ public class UserRestController {
 	@RequestMapping("find-password")
 	public Map<String, Object> findPassword(
 			@RequestParam("email")String email,
-			@RequestParam("name") String name) {
+			@RequestParam("name") String name,
+			HttpServletRequest request) {
 		
 		User user = userBO.selectUserByEmailName(email, name);
 		
@@ -166,21 +173,55 @@ public class UserRestController {
 			result.put("error_message", "비밀번호 찾기에 실패했습니다.");
 		} else {
 			userBO.sendEmail(user);
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
 			result.put("code", 200);
 			result.put("result", "성공");
 		}
 		return result;
 	}
 	
+	/**
+	 * 인증 번호 확인API
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("/check-certificationCode")
 	public Map<String, Object> checkCertificationCode(
-			@RequestParam("code") String code){
+			@RequestParam("code") String code,
+			HttpSession session){
+		int userId = (Integer)session.getAttribute("userId");
+		
 		//인증번호가 db에 있는지 확인
+		Certification certification = certificationBO.selectCertification(userId,code);
 		
 		//확인 후 응답 값
 		Map<String, Object> result = new HashMap<>();
+		if(certification != null) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "인증번호가 일치하지 않습니다.");
+		}
 		//확인 된 인증번호 db에서 delete
+		certificationBO.deleteCertification(userId, code);
 		
+		return result;
+	}
+	
+	@RequestMapping("/reset-password")
+	public Map<String, Object> resetPassword(
+			@RequestParam("password") String password,
+			HttpSession session) throws NoSuchAlgorithmException{
+		int userId = (Integer)session.getAttribute("userId");
+		String hashedPassword = EncryptUtils.sha256(password);
+		//비밀번호 재설정
+		userBO.updatePassword(userId, hashedPassword);
+		//응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
 		
 		return result;
 	}

@@ -54,6 +54,9 @@
             	   alert(data.error_message);
                }
             }
+            ,error:function(request, status, error){
+            	alert("인증번호 전송 실패");
+            }
          });//ajax
          
       });//findIdBtn

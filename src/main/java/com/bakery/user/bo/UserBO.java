@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bakery.certification.bo.CertificationBO;
 import com.bakery.certification.bo.MailBO;
 import com.bakery.certification.domain.Mail;
 import com.bakery.user.domain.User;
@@ -14,6 +15,9 @@ import com.bakery.user.mapper.UserMapper;
 public class UserBO {
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private CertificationBO certificationBO;
 	
 	@Autowired
 	private MailBO mailBO;
@@ -49,13 +53,17 @@ public class UserBO {
 	}
 	
 	
-	
+	//input:user
 	public void sendEmail(User user) {
 		String certificationCode = mailBO.getCertificationCode();
 		Mail mail = mailBO.createMailAndChangePassword(user.getEmail(), certificationCode);
 		mailBO.mailSend(mail);
-		mailBO.insertCertificationCode(certificationCode, user.getId());
-		
+		certificationBO.insertCertificationCode(certificationCode, user.getId());
+	}
+	
+	//input: password, userId
+	public void updatePassword(int userId, String password) {
+		userMapper.updatePassword(userId, password);
 	}
 	
 	

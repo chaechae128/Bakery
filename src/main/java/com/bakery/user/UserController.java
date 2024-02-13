@@ -112,9 +112,20 @@ public class UserController {
 		return "template/managerLayout";
 	}
 
+	/**
+	 * 비밀번호 찾기 - 인증번호 확인
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/check-certificationCode-view")
 	public String checkCertificationCodeView(Model model) {
 		model.addAttribute("viewName", "/user/checkCertification");
+		return "template/bakeryLayout";
+	}
+	
+	@RequestMapping("/reset-password-view")
+	public String resetPasswordView(Model model) {
+		model.addAttribute("viewName", "/user/resetPassword");
 		return "template/bakeryLayout";
 	}
 	

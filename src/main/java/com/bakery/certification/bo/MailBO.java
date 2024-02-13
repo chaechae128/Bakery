@@ -8,15 +8,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.bakery.certification.domain.Mail;
-import com.bakery.certification.mapper.MailMapper;
 
 @Service
 public class MailBO {
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
-	@Autowired
-	private MailMapper mailMapper;
 	
 	public static String getCertificationCode() {
 		Random rand = new Random();
@@ -51,13 +47,5 @@ public class MailBO {
         javaMailSender.send(message);
     }
     
-    //인증코드 업데이트
-    public void insertCertificationCode(String certificationCode, int userId){
-    	mailMapper.insertCertificationCode(certificationCode, userId);
-    	
-    }
     
-//    public  selectCertification(String code) {
-//    	
-//    }
 }

@@ -36,4 +36,8 @@ public interface UserMapper {
 	public User selectUserByEmailName(
 			@Param("email")String email, 
 			@Param("name")String name);
+	
+	public void updatePassword(
+			@Param("userId")int userId, 
+			@Param("password")String password);
 }

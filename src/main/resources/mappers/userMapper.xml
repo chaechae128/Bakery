@@ -89,4 +89,13 @@
  			AND
  			`name` = #{name}
  	</select>
+ 	
+ 	<update id="updatePassword" parameterType="Map">
+ 		UPDATE `user`
+ 		SET	`password` = #{password}
+ 		WHERE
+ 			`id` = #{userId}
+ 		
+ 		
+ 	</update>
  </mapper>

@@ -5,7 +5,7 @@
       <h1 class="display-4 font-weight-bold">인증번호 확인</h1>
    </div>
    <hr>
-   <form action="/user/find-id" method="post">
+   <form action="/user/check-certificationCode" method="post">
    	  
       <div class="d-flex justify-content-center mt-3">
       	<input id="code" name="code" placeholder="인증번호 입력" class="form-control col-2 mr-1">
@@ -21,7 +21,7 @@
 <script>
    $(document).ready(function(){
       
-      $("#findPwBtn").on('click', function(e){
+      $("#checkCodeBtn").on('click', function(e){
          e.preventDefault();
          //alert("클릭");
          let code = $("#code").val().trim();
@@ -42,6 +42,9 @@
                }else{
             	   alert(data.error_message);
                }
+            }
+            ,error:function(request, status, error){
+            	alert("인증번호 인증 실패");
             }
          });//ajax
          
