@@ -1,5 +1,7 @@
 package com.bakery.product.entity;
 
+import java.time.ZonedDateTime;
+
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
@@ -27,10 +29,10 @@ public class ProductEntity {
 	private int id;
 	
 	@Column(name="productName")
-	private int productName;
+	private String productName;
 	
 	@Column(name="imagePath")
-	private int imagePath;
+	private String imagePath;
 	
 	private int stock;
 	
@@ -40,13 +42,13 @@ public class ProductEntity {
 	@Column(name="sellingPrice")
 	private int sellingPrice;
 	
-	private int category;
+	private String category;
 	
 	@Column(name="createdAt", updatable = false)
 	@UpdateTimestamp
-	private int createdAt;
+	private ZonedDateTime createdAt;
 	
 	@Column(name="updatedAt")
 	@UpdateTimestamp
-	private int updatedAt;
+	private ZonedDateTime updatedAt;
 }
