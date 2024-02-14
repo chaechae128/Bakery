@@ -33,10 +33,10 @@
 	</div>
 	<!--검색-->
 	<div class="d-flex  align-items-center">
-		<input type="text" class="d-flex justify-content-end search">
-		<a href=""><img
+		<input type="text" class="d-flex justify-content-end search" id="search" name="search">
+		<button id="searchBtn" width="30px"><img
 			src="https://img.freepik.com/premium-vector/magnifying-glass-icon-vector-illustration_230920-960.jpg"
-			alt="searchIcon" height="35px"></a>
+			alt="searchIcon" height="30px"></button>
 	</div>
 </div>
 <hr>
@@ -128,6 +128,22 @@
 			});//ajax
 		});//Breadbtn
 		
-		
+		$("#searchBtn").on('click', function() {
+			let search = $("#search").val().trim();
+			//alert(search);
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"search":search}		
+				,success:function(data){
+		         	location.href="/product/product-list?menu=search";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		        }
+			});//ajax
+			
+			
+		});//searchBtn
 	});//ready
 </script>

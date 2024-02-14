@@ -40,7 +40,7 @@ public class ProductBO {
 			return productRepository.findByCategory("빵"); 
 			
 		} else {
-			return productRepository.findAll(); 
+			return productRepository.findByProductNameContaining(menu); 
 		}
 	}
 }
