@@ -28,7 +28,7 @@
 		<button id="Bestbtn" class="btn mx-1">베스트</button>
 		<button id="Newbtn" class="btn mx-1">NEW</button>
 		<button id="Cakebtn" class="btn mx-1">케이크</button>
-		<button id="Cookiebtn" class="btn mx-1">쿠키</button>
+		<button id="Dessertbtn" class="btn mx-1">디저트</button>
 		<button id="Breadbtn" class="btn mx-1">빵</button>
 	</div>
 	<!--검색-->
@@ -44,25 +44,90 @@
 <script>
 	$(document).ready(function(){
 		$("#Allbtn").on('click', function(){
-			let menu=$(this).val();
-			//console.log(value);
 			
 			$.ajax({
 				type:"GET"
 				,url:"/product/product-list"
-				,data:{"menu":menu}		
+				,data:{"menu":"All"}		
 				,success:function(data){
-		               if(data.code == 200){
-		                  location.href="/product/product-"+data.menu+"-list";
-		               }else{
-		            	   alert(data.error_message);
-		               }
-		            }
-		            ,error:function(request, status, error){
+		         	location.href="/product/product-list?menu=All";
+		         }
+		        ,error:function(request, status, error){
 		            	alert("목록 조회 실패");
-		            }
+		        }
 			});//ajax
-			
 		});//Allbtn
+		
+		$("#Bestbtn").on('click', function(){
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"menu":"Best"}		
+				,success:function(data){
+		         	location.href="/product/product-list?menu=Best";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		        }
+			});//ajax
+		});//Bestbtn
+		
+		$("#Newbtn").on('click', function(){
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"menu":"New"}		
+				,success:function(data){
+		         	location.href="/product/product-list?menu=New";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		        }
+			});//ajax
+		});//Newbtn
+		
+		$("#Cakebtn").on('click', function(){
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"menu":"Cake"}		
+				,success:function(data){
+		         	location.href="/product/product-list?menu=Cake";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		        }
+			});//ajax
+		});//Cakebtn
+		
+		$("#Dessertbtn").on('click', function(){
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"menu":"Dessert"}		
+				,success:function(data){
+		         	location.href="/product/product-list?menu=Dessert";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		        }
+			});//ajax
+		});//Dessertbtn
+		
+		$("#Breadbtn").on('click', function(){
+			$.ajax({
+				type:"GET"
+				,url:"/product/product-list"
+				,data:{"menu":"Bread"}		
+				,success:function(data){
+		         	location.href="/product/product-list?menu=Bread";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("목록 조회 실패");
+		        }
+			});//ajax
+		});//Breadbtn
+		
+		
 	});//ready
 </script>

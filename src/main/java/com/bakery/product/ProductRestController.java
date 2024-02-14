@@ -15,18 +15,6 @@ import com.bakery.product.domain.Product;
 @RestController
 @RequestMapping("/product")
 public class ProductRestController {
-	@Autowired
-	private ProductBO productBO;
 	
-	@RequestMapping("/product-list")
-	public Map<String, Object> productList(
-			@RequestParam("menu") String menu){
-		if (menu.equals("All")) {
-			List<Product> productList = productBO.selectAll();
-			
-		}
-		Map<String, Object> result = new HashMap<>();
-		return result;
-	}
 	
 }
