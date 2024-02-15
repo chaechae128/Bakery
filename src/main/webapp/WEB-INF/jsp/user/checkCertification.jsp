@@ -38,6 +38,7 @@
             ,data:{"code":code}
             ,success:function(data){
                if(data.code == 200){
+            	  alert("인증코드가 확인 되었습니다");
                   location.href="/user/reset-password-view";
                }else{
             	   alert(data.error_message);

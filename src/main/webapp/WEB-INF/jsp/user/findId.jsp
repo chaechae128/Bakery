@@ -7,7 +7,7 @@
    <hr>
    <form action="/user/find-id" method="post">
       <div class="d-flex justify-content-center">
-      	<input id="email" name="email" placeholder="이메일" class="form-control col-1 mr-1">
+      	<input id="email" name="email" placeholder="이메일" class="form-control col-2 mr-1">
       </div>
       <div class="d-flex justify-content-center mt-2">
          <input id="name" name="name" placeholder="이름" class="form-control col-2">

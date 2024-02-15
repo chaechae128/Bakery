@@ -49,6 +49,7 @@
             ,data:{"email":email, "name":name}
             ,success:function(data){
                if(data.code == 200){
+            	  alert("입력하신 이메일로 인증 코드가 발송되었습니다!");
                   location.href="/user/check-certificationCode-view";
                }else{
             	   alert(data.error_message);

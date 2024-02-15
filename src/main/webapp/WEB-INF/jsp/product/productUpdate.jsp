@@ -19,7 +19,7 @@
 				<select class="form-control col-7" id="category" name="category">
 		            <option>--카테고리--</option>
 		            <option>케이크</option>
-		            <option>쿠키</option>
+		            <option>디저트</option>
 		            <option>빵</option>
         		</select>
 			</div>
