@@ -48,6 +48,14 @@ public class ProductAdminBO {
 	
 	//input:productId output:x
 	public void deleteProductByProductId(int productId) {
-		productMapper.deleteProductByProductId(productId);
+		Product product = productMapper.selectProductById(productId);
+		
+		//db에서 product 삭제
+		int deleteRowCount = productMapper.deleteProductByProductId(productId);
+		
+		//이미지 파일 삭제
+		if(deleteRowCount > 0 && product.getImagePath() != null) {
+			fileManagerService.deleteFile(product.getImagePath());
+		}
 	}
 }

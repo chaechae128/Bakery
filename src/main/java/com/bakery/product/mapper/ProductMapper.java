@@ -31,7 +31,7 @@ public interface ProductMapper {
 			@Param("sellingPrice")int sellingPrice, 
 			@Param("category")String category);
 	
-	public void deleteProductByProductId(int productId);
+	public int deleteProductByProductId(int productId);
 	
 	public List<Product> selectAll();
 }
