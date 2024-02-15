@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bakery.administration.bo.ProductAdminBO;
+import com.bakery.product.bo.ProductBO;
 import com.bakery.product.domain.Product;
+import com.bakery.product.entity.ProductEntity;
 
 @Controller
 @RequestMapping("/product")
 public class ProductAdminController {
 	@Autowired
-	private ProductAdminBO productBO;
+	private ProductAdminBO productAdminBO;
+	
+	@Autowired
+	private ProductBO productBO;
 
 	/**
 	 * 상품 관리 화면
@@ -25,11 +30,23 @@ public class ProductAdminController {
 	 */
 	@GetMapping("/product-manage-view")
 	public String productManageView(Model model) {
-		List<Product> productList = productBO.selectProduct();
+		List<Product> productList = productAdminBO.selectProduct();
 		model.addAttribute("productList", productList);
 		model.addAttribute("viewName", "product/productManage");
 		
 		return "template/managerLayout";
+	}
+	
+	@GetMapping("/searchProduct")
+	public String searchUser(
+			@RequestParam("productName") String productName,
+			Model model){
+		//db select
+		List<ProductEntity> productList = productBO.selectBySearch(productName);
+		model.addAttribute("viewName", "product/productManage");
+		model.addAttribute("productList", productList);
+		return "template/managerLayout";
+		
 	}
 	
 	/**
@@ -48,7 +65,7 @@ public class ProductAdminController {
 	public String productUpdateView(Model model,
 			@RequestParam("productId") int productId) {
 		//db select
-		Product product = productBO.selectProductById(productId);
+		Product product = productAdminBO.selectProductById(productId);
 		model.addAttribute("product", product);
 		model.addAttribute("viewName", "product/productUpdate");
 		return "template/managerLayout";

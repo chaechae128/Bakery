@@ -6,8 +6,13 @@
 	<div class="col-10">
 		<div class="d-flex justify-content-between">
 			<h2>상품관리</h2>
-			<a href="/product/product-add-view"
-				class="addProductBtn btn btn-secondary">새 상품 등록</a>
+			<div class="d-flex  align-items-center">
+				<input type="text" class="d-flex justify-content-end search" id="productName" name="productName">
+				<button id="productSearchBtn" class="btn"><img src="https://img.freepik.com/premium-vector/magnifying-glass-icon-vector-illustration_230920-960.jpg" alt="searchIcon" height="35px"></button>
+				<a href="/product/product-manage-view" class="btn bg-lemon mr-3">전체 조회</a>
+				<a href="/product/product-add-view"
+					class="addProductBtn btn btn-secondary">새 상품 등록</a>
+			</div>
 		</div>
 	</div>
 
@@ -46,3 +51,25 @@
 	</tbody>
 </table>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$("#productSearchBtn").on('click', function() {
+			let productName = $("#productName").val().trim();
+			//alert(user);
+			$.ajax({
+				type:"GET"
+				,url:"/product/searchProduct"
+				,data:{"productName":productName}		
+				,success:function(data){
+		         	location.href="/product/searchProduct?productName="+productName;
+		         }
+		        ,error:function(request, status, error){
+		            	alert("상품 조회 실패");
+		        }
+			});//ajax
+			
+			
+		});//productSearchBtn
+	});//document
+</script>
