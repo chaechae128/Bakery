@@ -10,7 +10,7 @@
 	    <tr>
 	    </c:if>
 			<td class="p-3">
-		    	<a href="#">
+		    	<a href="/product/product-detail-view?productId=${product.id}">
 		       		<div><img src="${product.imagePath}" alt="상품 사진" width="200px"></div>
 					<div>${product.productName}</div>
 					<div>${product.sellingPrice}</div>

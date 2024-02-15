@@ -47,4 +47,8 @@ public class ProductBO {
 	public List<ProductEntity> selectBySearch(String search) {
 		return productRepository.findByProductNameContaining(search); 
 	}
+	
+	public ProductEntity selectByProductId(int productId) {
+		return productRepository.findById(productId).orElse(null);
+	}
 }

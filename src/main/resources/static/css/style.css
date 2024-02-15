@@ -28,3 +28,21 @@ footer{
 #content{
 	min-height: 500px
 }
+
+.margin-40{
+	margin-left:150px;
+}
+
+#buyBtn{
+	 width :278px;
+	 height : 40px;
+}
+
+#likeBtn {
+	width: 130px;
+	height : 40px;
+}
+#cartBtn {
+	width: 130px;
+	height : 40px;
+}

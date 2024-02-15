@@ -39,4 +39,15 @@ public class ProductController {
 		model.addAttribute("viewName", "/product/productList");
 		return "template/bakeryLayout";
 	}
+	
+	@GetMapping("/product-detail-view")
+	public String productDetail(
+			@RequestParam("productId") int productId,
+			Model model) {
+		ProductEntity product = productBO.selectByProductId(productId);
+		model.addAttribute("product", product);
+		
+		model.addAttribute("viewName", "/product/productDetail");
+		return "template/bakeryLayout";
+	}
 }

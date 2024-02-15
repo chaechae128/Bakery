@@ -37,6 +37,12 @@ public class ProductAdminController {
 		return "template/managerLayout";
 	}
 	
+	/**
+	 * 관리자 상품 관리 - 검색 
+	 * @param productName
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/searchProduct")
 	public String searchUser(
 			@RequestParam("productName") String productName,
