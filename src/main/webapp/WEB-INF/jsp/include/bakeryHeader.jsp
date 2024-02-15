@@ -133,10 +133,10 @@
 			//alert(search);
 			$.ajax({
 				type:"GET"
-				,url:"/product/product-list"
+				,url:"/product/product-search-list"
 				,data:{"search":search}		
 				,success:function(data){
-		         	location.href="/product/product-list?menu=search";
+		         	location.href="/product/product-search-list?search="+search;
 		         }
 		        ,error:function(request, status, error){
 		            	alert("목록 조회 실패");

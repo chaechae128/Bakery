@@ -40,7 +40,11 @@ public class ProductBO {
 			return productRepository.findByCategory("빵"); 
 			
 		} else {
-			return productRepository.findByProductNameContaining(menu); 
+			return productRepository.findAll(); 
 		}
+	}
+	
+	public List<ProductEntity> selectBySearch(String search) {
+		return productRepository.findByProductNameContaining(search); 
 	}
 }

@@ -28,4 +28,15 @@ public class ProductController {
 		model.addAttribute("viewName", "/product/productList");
 		return "template/bakeryLayout";
 	}
+	
+	@GetMapping("/product-search-list")
+	public String productSearch(
+			@RequestParam("search") String search,
+			Model model) {
+		List<ProductEntity> productList = productBO.selectBySearch(search);
+		model.addAttribute("productList", productList);
+		
+		model.addAttribute("viewName", "/product/productList");
+		return "template/bakeryLayout";
+	}
 }
