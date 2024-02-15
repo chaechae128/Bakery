@@ -8,8 +8,9 @@
 			<h2>회원관리</h2>
 			<!--검색-->
 			<div class="d-flex  align-items-center">
-				<input type="text" class="d-flex justify-content-end search" id="userSearch" name="userSearch">
+				<input type="text" class="d-flex justify-content-end search" id="user" name="user">
 				<button id="userSearchBtn" class="btn"><img src="https://img.freepik.com/premium-vector/magnifying-glass-icon-vector-illustration_230920-960.jpg" alt="searchIcon" height="35px"></button>
+				<a href="/user/user-manage-view" class="btn bg-lemon">전체 조회</a>
 			</div>
 
 		</div>
@@ -49,32 +50,22 @@
 
 <script>
 	$(document).ready(function(){
-		$("#userSearchBtn").on('click', function(){
-			//alert("클릭");
-			let name = $("#userSearch").val();
-			//console.log(name);
-			
-			if(!name){
-				alert("검색할 회원을 입력해주세요");
-				return false;
-			}
-			
+		$("#userSearchBtn").on('click', function() {
+			let userName = $("#user").val().trim();
+			//alert(user);
 			$.ajax({
-				type:"POST"
+				type:"GET"
 				,url:"/user/searchUser"
-				,data:{"name":name}
+				,data:{"userName":userName}		
 				,success:function(data){
-					if(data.code == 200){
-						location.reload();
-					} else{
-						alert(data.error_message);
-					}
-				}
-				,error:function(request, status, error){
-					alert("회원 검색에 실패하였습니다");
-				}
+		         	location.href="/user/searchUser?userName="+userName;
+		         }
+		        ,error:function(request, status, error){
+		            	alert("회원 조회 실패");
+		        }
 			});//ajax
 			
-		});//userSearchBtn
+			
+		});//searchBtn
 	});//document
 </script>

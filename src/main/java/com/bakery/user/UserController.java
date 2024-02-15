@@ -1,6 +1,8 @@
 package com.bakery.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,12 +94,39 @@ public class UserController {
 		return "template/bakeryLayout";
 	}
 
+	/**
+	 * 비밀번호 찾기 화면
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/find-password-view")
 	public String findPasswordView(Model model) {
 		model.addAttribute("viewName", "/user/findPassword");
 		return "template/bakeryLayout";
 	}
 
+
+	/**
+	 * 비밀번호 찾기 - 인증번호 확인
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/check-certificationCode-view")
+	public String checkCertificationCodeView(Model model) {
+		model.addAttribute("viewName", "/user/checkCertification");
+		return "template/bakeryLayout";
+	}
+	
+	/**
+	 * 비밀번호 찾기 - 비밀번호 재설정
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/reset-password-view")
+	public String resetPasswordView(Model model) {
+		model.addAttribute("viewName", "/user/resetPassword");
+		return "template/bakeryLayout";
+	}
 	/**
 	 * 관리자- 회원관리 화면
 	 * 
@@ -112,22 +141,15 @@ public class UserController {
 		return "template/managerLayout";
 	}
 
-	/**
-	 * 비밀번호 찾기 - 인증번호 확인
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/check-certificationCode-view")
-	public String checkCertificationCodeView(Model model) {
-		model.addAttribute("viewName", "/user/checkCertification");
-		return "template/bakeryLayout";
+	@RequestMapping("/searchUser")
+	public String searchUser(
+			@RequestParam("userName") String userName,
+			Model model){
+		//db select
+		List<User> userList = userBO.selectUserByName(userName);
+		model.addAttribute("viewName", "/user/userManage");
+		model.addAttribute("userList", userList);
+		return "template/managerLayout";
+		
 	}
-	
-	@RequestMapping("/reset-password-view")
-	public String resetPasswordView(Model model) {
-		model.addAttribute("viewName", "/user/resetPassword");
-		return "template/bakeryLayout";
-	}
-	
-
 }

@@ -125,39 +125,35 @@ public class UserRestController {
 		return result;
 	}
 	
-	@RequestMapping("/reset-pw")
-	public  Map<String, Object> resetPw(
-			@RequestParam("loginId") String loginId,
-			@RequestParam("email") String email,
-			@RequestParam("name") String name) {
-		
-		
-		Map<String, Object> result = new HashMap<>();
-		return result;
-	}
-	
-	
-	@RequestMapping("/searchUser")
-	public Map<String, Object> searchUser(
-			@RequestParam("name") String name){
-		//db select
-		List<User> userListByName = userBO.selectUserByName(name);
-		//응답값
-		Map<String, Object> result = new HashMap<>();
-		if(userListByName != null) {
-			result.put("code", 200);
-			result.put("result", "성공");
-			result.put("userListByName", userListByName);
-		}
-		else {
-			result.put("code", 500);
-			result.put("result", "실패");
-		}
-		return result;
-	}
+//	/**
+//	 * 비밀번호 재설정 API
+//	 * @param loginId
+//	 * @param email
+//	 * @param name
+//	 * @return
+//	 */
+//	@RequestMapping("/reset-pw")
+//	public  Map<String, Object> resetPw(
+//			@RequestParam("loginId") String loginId,
+//			@RequestParam("email") String email,
+//			@RequestParam("name") String name) {
+//		
+//		
+//		Map<String, Object> result = new HashMap<>();
+//		return result;
+//	}
 	
 	
 	
+	
+	
+	/**
+	 * 비밀번호 재설정 위한 메일 보내기
+	 * @param email
+	 * @param name
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("find-password")
 	public Map<String, Object> findPassword(
 			@RequestParam("email")String email,
@@ -209,6 +205,7 @@ public class UserRestController {
 		
 		return result;
 	}
+	
 	
 	@RequestMapping("/reset-password")
 	public Map<String, Object> resetPassword(
