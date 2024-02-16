@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bakery.like.mapper.LikeMapper;
 import com.bakery.product.entity.ProductEntity;
 import com.bakery.product.repository.ProductRepository;
 
@@ -13,7 +14,8 @@ public class ProductBO {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	
+	@Autowired
+	private LikeMapper likeMapper;
 	
 	//메뉴 - cake
 	public List<ProductEntity> findByCategory(String category) {
@@ -50,5 +52,14 @@ public class ProductBO {
 	
 	public ProductEntity selectByProductId(int productId) {
 		return productRepository.findById(productId).orElse(null);
+	}
+	
+	public boolean isLikeByUserIDProductId(int userId, int productId) {
+		Integer count = likeMapper.selectLikeByUserIdProductId(userId, productId);
+		if(count > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

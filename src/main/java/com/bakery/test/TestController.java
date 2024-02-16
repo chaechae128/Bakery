@@ -38,10 +38,10 @@ public class TestController {
 		return "test/test";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/test4")
-	public List<Like> test4(){
-		return likeMapper.selectLikeList();
-	}
-	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("/test4") public List<Like> test4(){ return
+	 * likeMapper.selectLikeList(); }
+	 */
 }

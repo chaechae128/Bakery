@@ -34,4 +34,6 @@ public interface ProductMapper {
 	public int deleteProductByProductId(int productId);
 	
 	public List<Product> selectAll();
+	
+
 }

@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bakery.product.bo.ProductBO;
+import com.bakery.product.domain.Product;
 import com.bakery.product.entity.ProductEntity;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/product")
@@ -43,9 +46,18 @@ public class ProductController {
 	@GetMapping("/product-detail-view")
 	public String productDetail(
 			@RequestParam("productId") int productId,
-			Model model) {
+			Model model,
+			HttpSession session) {
 		ProductEntity product = productBO.selectByProductId(productId);
 		model.addAttribute("product", product);
+
+		//로그인 되어있을 때만 찜 눌렀는지 여부 보내기
+		Integer userId = (Integer)session.getAttribute("userId");
+		if (userId != null) {
+			boolean isLike = productBO.isLikeByUserIDProductId(userId, productId);
+			model.addAttribute("isLike", isLike);
+			
+		}
 		
 		model.addAttribute("viewName", "/product/productDetail");
 		return "template/bakeryLayout";

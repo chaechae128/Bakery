@@ -12,7 +12,12 @@ import com.bakery.like.mapper.LikeMapper;
 public class LikeBO {
 	@Autowired
 	private LikeMapper likeMapper;
-	public List<Like> selectLikeList(){
-		return likeMapper.selectLikeList();
+	
+	public int insertLikeByUserIdProductId(int userId, int productId) {
+		return likeMapper.insertLikeByUserIdProductId(userId, productId);
+	}
+	
+	public int deleteLikeByUserIdProductId(int userId, int productId) {
+		return likeMapper.deleteLikeByUserIdProductId(userId, productId);
 	}
 }

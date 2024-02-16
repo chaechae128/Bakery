@@ -17,4 +17,7 @@ public class Product {
 	private String category;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	//로그인 한 사람이 하트 눌렀는지
+	private boolean filledLike;
 }

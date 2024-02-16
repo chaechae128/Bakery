@@ -3,12 +3,36 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.bakery.like.mapper.LikeMapper">
-	<select id="selectLikeList" resultType="com.bakery.like.domain.Like">
-		SELECT
-			`id`
-			,`productId`
+	<insert id="insertLikeByUserIdProductId" parameterType="map">
+		INSERT INTO `like`
+		(
+			`productId`
 			,`userId`
-		FROM	
-			`like`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{productId}
+			,#{userId}
+			,NOW()
+			,NOW()
+		)
+	</insert>
+	
+	<select id="selectLikeByUserIdProductId" parameterType="map">
+		SELECT COUNT(1) FROM	`like`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`productId` = #{productId}
 	</select>
+	
+	<delete id="deleteLikeByUserIdProductId" parameterType="map">
+		DELETE FROM `like`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`productId` = #{productId}
+	</delete>
 </mapper>

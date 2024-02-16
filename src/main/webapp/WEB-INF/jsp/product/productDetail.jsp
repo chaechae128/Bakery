@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="d-flex justify-content-center p-3">
 	<div>
 		<img src="${product.imagePath}" width="300px">
@@ -24,9 +26,27 @@
  		</div>
  		
  		<div class="d-flex mt-3 justify-content-center"> 
- 			<button class="bg-lemon border-0 mr-3" id="likeBtn">찜하기</button>
- 			<button class="bg-lemon border-0 mr-3" id="cartBtn">장바구니</button>
+	 		<c:choose>
+	 			<%--하트가 채워져 있을 때 --%>
+				<c:when test="${isLike eq true}"> 
+					<div class="d-flex justify-content-center"> 
+						<button class="bg-lemon border-0 mr-3" id="dislikeBtn" data-product-id="${product.id}">찜하기  
+			 			<img src="/static/image/heart-icon.png" width="20px">
+	 					</button>
+	 				</div>
+				</c:when>
+				<%--하트가 비워져 있을 때 --%>
+				<c:otherwise>
+					<div class="d-flex justify-content-center"> 
+						<button class="bg-lemon border-0 mr-3" id="likeBtn" data-product-id="${product.id}">찜하기  
+			 			<img src="/static/image/empty-heart-icon.png" width="20px">
+	 					</button>
+	 				</div>
+				</c:otherwise>
+			</c:choose>
+			<button class="bg-lemon border-0 mr-3" id="cartBtn">장바구니</button>
  		</div>
+
  	</div>
 </div>
 
@@ -37,8 +57,6 @@
 			if(count != 0) {
 				$("#count").attr('value', parseInt(count)-1);    	
 			}
-			 
-			 
 		});
 		
 		$("#plusBtn").on('click', function(){
@@ -46,6 +64,52 @@
 			//console.log(parseInt(count) + 1);
 			$("#count").attr('value', parseInt(count)+1);    
 		});
+		
+		//찜하기
+		$("#likeBtn").on('click', function(){
+			let productId = $(this).data("product-id");
+			//alert(productId);
+			
+			$.ajax({
+				type:"GET"
+				,url:"/like/like?productId=" + productId
+				,data:{"productId":productId}
+				,success:function(data){
+					if(data.code == 200) {
+						location.reload();
+					} else {
+						alert(data.error_message);
+					}
+				}
+				,error:function(request, status, error){
+					alert("찜하기에 실패했습니다");
+				}
+			});//ajax
+			
+		});//likeBtn
+		
+		$("#dislikeBtn").on('click', function(){
+			let productId = $(this).data("product-id");
+			//alert(productId);
+			
+			$.ajax({
+				type:"GET"
+				,url:"/like/dislike?productId=" + productId
+				,data:{"productId":productId}
+				,success:function(data){
+					if(data.code == 200) {
+						location.reload();
+					} else {
+						alert(data.error_message);
+					}
+				}
+				,error:function(request, status, error){
+					alert("찜하기에 실패했습니다");
+				}
+			});//ajax
+			
+		});//dislikeBtn
+		
 		
 		
 	});//document

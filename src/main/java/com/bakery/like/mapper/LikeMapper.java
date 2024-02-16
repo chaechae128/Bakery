@@ -1,12 +1,22 @@
 package com.bakery.like.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-
-import com.bakery.like.domain.Like;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface LikeMapper {
-	public List<Like> selectLikeList();
+	
+	
+	public int insertLikeByUserIdProductId(
+			@Param("userId")int userId, 
+			@Param("productId")int productId);
+	
+	public int selectLikeByUserIdProductId(
+			@Param("userId")int userId, 
+			@Param("productId")int productId);
+	
+	public int deleteLikeByUserIdProductId(
+			@Param("userId")int userId, 
+			@Param("productId")int productId);
+	
 }
