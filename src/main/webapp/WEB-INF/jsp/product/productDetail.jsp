@@ -14,9 +14,9 @@
  		
  		<%--수량 체크 --%>
  		<div class="my-3 d-flex justify-content-center">
-	 		<button class="border-0"><img src="/static/image/minus.jpg" width="30px"></button>
-	 		<input type="text" id="count" name="count">
-	 		<button class="border-0"><img src="/static/image/plus.jpg" width="30px"></button>
+	 		<button class="border-0" id="minusBtn"><img src="/static/image/minus.jpg" width="30px"></button>
+	 		<input type="text" id="count" name="count" value="1" class="text-center">
+	 		<button class="border-0" id="plusBtn"><img src="/static/image/plus.jpg" width="30px"></button>
  		</div>
  		
  		<div class="d-flex justify-content-center">
@@ -29,3 +29,25 @@
  		</div>
  	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$("#minusBtn").on('click', function(){
+			let count = $("#count").val();
+			if(count != 0) {
+				$("#count").attr('value', parseInt(count)-1);    	
+			}
+			 
+			 
+		});
+		
+		$("#plusBtn").on('click', function(){
+			let count = $("#count").val();
+			//console.log(parseInt(count) + 1);
+			$("#count").attr('value', parseInt(count)+1);    
+		});
+		
+		
+	});//document
+
+</script>
