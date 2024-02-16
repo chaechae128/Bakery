@@ -35,4 +35,10 @@
 			AND
 			`productId` = #{productId}
 	</delete>
+	
+	<select id="selectLikeByUserId" parameterType="int" resultType="com.bakery.like.domain.Like">
+		SELECT * FROM `like`
+		WHERE
+			`userId` = #{userId}
+	</select>
 </mapper>

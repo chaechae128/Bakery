@@ -20,4 +20,8 @@ public class LikeBO {
 	public int deleteLikeByUserIdProductId(int userId, int productId) {
 		return likeMapper.deleteLikeByUserIdProductId(userId, productId);
 	}
+	
+	public List<Like> selectLikeByUserId(int userId) {
+		return likeMapper.selectLikeByUserId(userId);
+	}
 }

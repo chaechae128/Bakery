@@ -11,12 +11,13 @@
 		<div class="ml-2">${userName}님 환영합니다~</div>
 		<a href="/user/sign-out" class="ml-2">로그아웃</a>
 		<a href="/cart/cart-list-view" class="ml-2">장바구니</a>
-		<a href="/user/user-update-view" class="ml-2">마이페이지</a>
+		<!-- <a href="/user/user-update-view" class="ml-2">마이페이지</a> -->
+		<a href="/like//like-list-view?userId=${userId}" class="ml-2">마이페이지</a>
 	</c:if>
 	<!-- 로그인 아닐 경우  -->
 	<c:if test="${empty userName}">
 		<a href="/user/sign-up-view" class="ml-2">회원가입</a> 
-		<a href="/user/sign-in-view" class="ml-2">로그인</a>
+		<a href="/like//like-list-view" class="ml-2">로그인</a>
 	</c:if>
 </div>
 <hr>
