@@ -44,7 +44,7 @@
 	 				</div>
 				</c:otherwise>
 			</c:choose>
-			<button class="bg-lemon border-0 mr-3" id="cartBtn">장바구니</button>
+			<button class="bg-lemon border-0 mr-3" id="cartBtn" data-product-id="${product.id}">장바구니</button>
  		</div>
 
  	</div>
@@ -110,7 +110,29 @@
 			
 		});//dislikeBtn
 		
-		
+		$("#cartBtn").on('click', function(){
+			let productId = $(this).data("product-id");
+			let count =  $("#count").val();
+			//alert(count);
+			
+			$.ajax({
+				type:"POST"
+				,url:"/cart/cart-in"
+				,data:{"productId":productId, "count":count}
+				,success:function(data){
+					if(data.code == 200) {
+						alert("장바구니에 상품이 담겼습니다");
+						location.reload();
+					} else {
+						alert(data.error_message);
+					}
+				}
+				,error:function(request, status, error){
+					alert("장바구니에 담지 못했습니다");
+				}
+			});//ajax
+			
+		});//cartBtn
 		
 	});//document
 
