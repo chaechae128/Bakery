@@ -27,4 +27,10 @@
 			AND
 			`userId` = #{userId}
 	</select>
+	
+	<select id="selectCarListByUserId" parameterType="int" resultType="com.bakery.cart.domain.Cart">
+		SELECT * FROM `cart`
+		WHERE
+			`userId` = #{userId}
+	</select>
 </mapper>

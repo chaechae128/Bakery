@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bakery.cart.domain.Cart;
 import com.bakery.like.domain.Like;
 import com.bakery.like.mapper.LikeMapper;
 import com.bakery.product.entity.ProductEntity;
@@ -65,11 +66,19 @@ public class ProductBO {
 		}
 	}
 	
-	public List<ProductEntity> selectByProductIdList(List<Like> likeList) {
+	public List<ProductEntity> selectBylikeList(List<Like> likeList) {
 		List<ProductEntity> productList = new ArrayList<>();
 		for(int i = 0; i<likeList.size(); i++) {
 			int productId = likeList.get(i).getProductId();
-			//ProductEntity product = productRepository.findById(likeList.get(i).getProductId()).orElse(null);
+			productList.add(productRepository.findById(productId).orElse(null));
+		}
+		return productList;
+	}
+	
+	public List<ProductEntity> selectBycartList(List<Cart> cartList) {
+		List<ProductEntity> productList = new ArrayList<>();
+		for(int i = 0; i<cartList.size(); i++) {
+			int productId = cartList.get(i).getProductId();
 			productList.add(productRepository.findById(productId).orElse(null));
 		}
 		return productList;
