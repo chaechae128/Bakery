@@ -1,15 +1,15 @@
 package com.bakery.user;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bakery.aop.TimeTrace;
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
 
@@ -41,11 +41,12 @@ public class UserController {
 	 * @param session
 	 * @return
 	 */
+	@TimeTrace
 	@RequestMapping("sign-in-view")
 	public String signInView(Model model, HttpSession session) {
 		model.addAttribute("viewName", "/user/signIn");
 		String userName = (String) session.getAttribute("userName");
-		int userId = (Integer) session.getAttribute("userId");
+		String userId = (String) session.getAttribute("userId");
 		model.addAttribute("userName", userName);
 		model.addAttribute("userId", userId);
 		return "template/bakeryLayout";
@@ -143,6 +144,12 @@ public class UserController {
 		return "template/managerLayout";
 	}
 
+	/**
+	 * 관리자 - 회원 검색
+	 * @param userName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/searchUser")
 	public String searchUser(
 			@RequestParam("userName") String userName,
@@ -152,6 +159,14 @@ public class UserController {
 		model.addAttribute("viewName", "/user/userManage");
 		model.addAttribute("userList", userList);
 		return "template/managerLayout";
-		
 	}
+	
+	@GetMapping("/myPage") 
+	public String myPage(
+			@RequestParam("userId") int userId,
+			Model model) {
+		model.addAttribute("viewName", "/myPage/userInformation");
+		return "template/bakeryLayout";
+	}
+	
 }

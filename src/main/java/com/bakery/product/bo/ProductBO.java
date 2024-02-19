@@ -1,10 +1,12 @@
 package com.bakery.product.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bakery.like.domain.Like;
 import com.bakery.like.mapper.LikeMapper;
 import com.bakery.product.entity.ProductEntity;
 import com.bakery.product.repository.ProductRepository;
@@ -61,5 +63,15 @@ public class ProductBO {
 		} else {
 			return false;
 		}
+	}
+	
+	public List<ProductEntity> selectByProductIdList(List<Like> likeList) {
+		List<ProductEntity> productList = new ArrayList<>();
+		for(int i = 0; i<likeList.size(); i++) {
+			int productId = likeList.get(i).getProductId();
+			//ProductEntity product = productRepository.findById(likeList.get(i).getProductId()).orElse(null);
+			productList.add(productRepository.findById(productId).orElse(null));
+		}
+		return productList;
 	}
 }

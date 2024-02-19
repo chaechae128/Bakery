@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <div class="d-flex justify-content-center">
-
+<div class="margin-left"><h1>찜 목록</h1></div>
+<hr>
+<div class="d-flex justify-content-center">
 	<c:set var="i" value="0" />
 	<c:set var="j" value="5" />
 	<table>
-	  <c:forEach items="${likeList}" var="like">
+	  <c:forEach items="${productList}" var="product">
 	    <c:if test="${i%j == 0 }">
 	    <tr>
 	    </c:if>
 			<td class="p-3">
-		    	<a href="/product/product-detail-view?productId=${like.productId}">
-		       		<div><img src="${like.imagePath}" alt="상품 사진" width="200px"></div>
-					<div>${like.productName}</div>
-					<div>${like.sellingPrice}</div>
+		    	<a href="/product/product-detail-view?productId=${product.id}">
+		       		<div><img src="${product.imagePath}" alt="상품 사진" width="200px"></div>
+					<div>${product.productName}</div>
+					<div>${product.sellingPrice}</div>
 				</a>
 		     </td>
 	    <c:if test="${i%j == j-1 }">
@@ -23,8 +24,5 @@
 	    <c:set var="i" value="${i+1 }" />
 	  </c:forEach>
 	</table>
+</div>
 
-</div> --%>
-<c:forEach items="${likeList}" var="like">
-	<div>${like.productId}</div>
-</c:forEach>
