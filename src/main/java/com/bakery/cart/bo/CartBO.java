@@ -26,4 +26,8 @@ public class CartBO {
 		return cartMapper.selectCarListByUserId(userId);
 	}
 	
+	public int deleteCartByUserIdProductId(int userId, int productId) {
+		return cartMapper.deleteCartByUserIdProductId(userId, productId);
+	}
+	
 }
