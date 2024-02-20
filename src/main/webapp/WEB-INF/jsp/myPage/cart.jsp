@@ -6,6 +6,7 @@
 <div class="d-flex justify-content-center">
 	<table class="table text-center col-9">
 		<thead>
+			<th></th>
 			<th>상품사진</th>
 			<th>상품명</th>
 			<th>수량</th>
@@ -17,6 +18,7 @@
 				<c:forEach items="${productList}" var="product">
 					<tr>
 						<c:if test="${cart.productId eq product.id}">
+							<td><label><input type="checkbox" checked class="choice" name="choice" value="${product.id}" id="${product.id}" data-product-price="${product.sellingPrice * cart.count}"></label></td>
 							<td><a href="/product/product-detail-view?productId=${product.id}"><img src="${product.imagePath}" width="100px"></a></td>
 							<td>${product.productName}</td>
 							<td>${cart.count}</td>
@@ -56,21 +58,25 @@
 <script>
 	$(document).ready(function(){
 		 $("#orderBtn").on('click', function(){
-			 let arr = [];
+			 let productIdArray = [];
 			 let product = $("input[name='choice']:checked");
 			 $(product).each(function() {
-			   arr.push($(this).val());
+				 productIdArray.push($(this).val());
 			 });
 			 //console.log(arr); 
 			 
-			 /* $.ajax({
-				type:"POST",
-				,url:"/order/create"
-				,data:{"productArray":arr}
+			 $.ajax({
+				type:"POST"
+				,url:"/order/order-create-view"
+				,data:{"productIdArray":productIdArray}
+			 	,traditional: true
 			 	,success:function(data) {
-			 		
+			 	 	location.href="/order/order-create-view";
+		         }
+		        ,error:function(request, status, error){
+		            	alert("주문서 작성으로 가지 못했습니다");
 			 	}
-			 });// */
+			 });
 			 
 		});//choice
 		

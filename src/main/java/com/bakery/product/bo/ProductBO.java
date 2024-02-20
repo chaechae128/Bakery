@@ -83,4 +83,13 @@ public class ProductBO {
 		}
 		return productList;
 	}
+	
+	public List<ProductEntity> selectByOrder(int[] arr) {
+		List<ProductEntity> productList = new ArrayList<>();
+		for(int i = 0; i<arr.length; i++) {
+			int productId = arr[i];
+			productList.add(productRepository.findById(productId).orElse(null));
+		}
+		return productList;
+	}
 }
