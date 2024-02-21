@@ -40,4 +40,6 @@ public interface UserMapper {
 	public void updatePassword(
 			@Param("userId")int userId, 
 			@Param("password")String password);
+	
+	public User selectByUserId(int userId);
 }

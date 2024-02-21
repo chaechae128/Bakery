@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,6 +12,8 @@ import com.bakery.cart.bo.CartBO;
 import com.bakery.cart.domain.Cart;
 import com.bakery.product.bo.ProductBO;
 import com.bakery.product.entity.ProductEntity;
+import com.bakery.user.bo.UserBO;
+import com.bakery.user.domain.User;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,6 +25,9 @@ public class OrderController {
 
 	@Autowired
 	private CartBO cartBO;
+	
+	@Autowired
+	private UserBO userBO;
 
 //	@RequestMapping("/order-create-view")
 //	public String orderCreateView(@RequestParam(value = "productIdArray", required = false) String[] productIdArray,
@@ -48,6 +52,9 @@ public class OrderController {
 	@RequestMapping("/order-create-view")
 	public String orderCreateView(@RequestParam(value = "choice") List<Integer> choice, Model model, HttpSession session) {
 		int userId = (int) session.getAttribute("userId");
+		User user = userBO.selectByUserId(userId);
+		model.addAttribute("user", user);
+		
 		List<Cart> cartList = cartBO.selectCarListByUserId(userId);
 		model.addAttribute("cartList", cartList);
 		

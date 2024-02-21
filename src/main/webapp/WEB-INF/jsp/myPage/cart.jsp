@@ -38,49 +38,10 @@
 	</form>	
 </div>
 
-<!-- <div >
-	<hr>
-	<h2 class="display-4 margin-left">주문금액</h2>
-	<hr>
-	<div class="d-flex justify-content-around">
-		<h3 class="display-6 ">상품금액: </h3>
-		<h3 class="display-6 margin-left"><input class="text border-0" id="productPrice" value=""></h3>
-	</div>
-	<div class="d-flex justify-content-around">
-		<h3 class="display-6 ">배송비: </h3>
-		<h3 class="display-6 margin-left">3,000 원</h3>
-	</div>
-	<hr>
-	<div class="justify-content-end">
-		<h4 class="display-4 margin-left font-weight-bold">총 금액:</h4>
-	</div>
-</div> -->
+
 
 <script>
 	$(document).ready(function(){
-		/*  $("#orderBtn").on('click', function(){
-			 let productIdArray = [];
-			 let product = $("input[name='choice']:checked");
-			 $(product).each(function() {
-				 productIdArray.push($(this).val());
-			 });
-			 //console.log(productIdArray); 
-			 
-			 $.ajax({
-				type:"POST"
-				,url:"/order/order-create-view"
-				,data:{"productIdArray":productIdArray}
-			 	,traditional: true
-			 	,success:function() {
-			 		location.href="/order/order-create-view";
-			 		//location.href="/order/order-create-view?productIdArray"+productIdArray;
-		         }
-		        ,error:function(request, status, error){
-		            	alert("주문서 작성으로 가지 못했습니다");
-			 	}
-			 });
-			 
-		});//choice */
 		
 		$(".deleteBtn").on('click', function(){
 			let productId = $(this).data("product-id");

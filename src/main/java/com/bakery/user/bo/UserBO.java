@@ -66,6 +66,8 @@ public class UserBO {
 		userMapper.updatePassword(userId, password);
 	}
 	
-	
+	public User selectByUserId(int userId) {
+		return userMapper.selectByUserId(userId);
+	}
 	
 }
