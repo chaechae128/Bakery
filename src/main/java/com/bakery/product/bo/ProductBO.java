@@ -84,10 +84,10 @@ public class ProductBO {
 		return productList;
 	}
 	
-	public List<ProductEntity> selectByOrder(int[] arr) {
+	public List<ProductEntity> selectByOrder(List<Integer> productIdList) {
 		List<ProductEntity> productList = new ArrayList<>();
-		for(int i = 0; i<arr.length; i++) {
-			int productId = arr[i];
+		for(int i = 0; i<productIdList.size(); i++) {
+			int productId = productIdList.get(i);
 			productList.add(productRepository.findById(productId).orElse(null));
 		}
 		return productList;
