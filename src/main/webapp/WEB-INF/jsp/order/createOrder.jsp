@@ -44,26 +44,26 @@
 <div class="d-flex justify-content-center col-6">
 	<h3 class="mr-3">받으시는 분</h3>
 	<div class="d-flex ml-3">
-		 <span class="mr-3">내 주소로</span><input type="checkbox" class="my" name="my">
+		 <span class="mr-3">내 주소로</span><input type="checkbox" id="my" class="my" name="my" data-user-name="${user.name}" data-user-phone-number="${user.phoneNumber}" data-user-address="${user.address}">
 	</div>
 </div>
 <div class="d-flex justify-content-center col-6">
 			<table class="text-center col-6 table">
 				<tr>
 					<th>받는사람</th>
-					<td><input type="text" class="border-0"></td>
+					<td><input type="text" class="border-0" id="taker"></td>
 				</tr>
 				<tr>
 					<th>휴대폰 번호</th>
-					<td><input type="text" class="border-0"></td>
+					<td><input type="text" class="border-0" id="phoneNumber"></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td><input type="text" class="border-0"></td>
+					<td><input type="text" class="border-0" id="address"></td>
 				</tr>
 				<tr>
 					<th>주문시 요청사항</th>
-					<td><input type="text" class="border-0"></td>
+					<td><input type="text" class="border-0" id="request"></td>
 				</tr>
 				
 			</table>
@@ -85,5 +85,23 @@
 		let productId = $(".price").data("product-id");
 		let price = $("#price"+productId).data("product-price");
 		console.log(price);
+		
+		$("#my").on('change', function(){
+			//alert("클릭");
+			let chk = $("input[type=checkbox]");
+			if(chk.is(":checked")) {
+				$("#taker").attr("value", $(this).data("user-name"));
+				$("#phoneNumber").attr("value", $(this).data("user-phone-number"));
+				$("#address").attr("value", $(this).data("user-address"));
+				//console.log( $(this).data("user-number"));
+			} else {
+				$("#taker").attr("value", "");
+				$("#phoneNumber").attr("value", "");
+				$("#address").attr("value","");
+			}
+			
+		});
+		
+		
 	});//document
 </script>
