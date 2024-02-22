@@ -61,6 +61,7 @@ public class OrderController {
 		List<ProductEntity> productList = productBO.selectByOrder(choice);
 		model.addAttribute("viewName", "/order/createOrder");
 		model.addAttribute("productList", productList);
+		model.addAttribute("productCount", productList.size());
 		return "template/bakeryLayout";
 	}
 
