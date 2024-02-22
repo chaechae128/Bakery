@@ -81,7 +81,11 @@
 				<h3 class="font-weight-bold">주문 상품 금액 : <input type="number" class="border-0" id="ProductPrice"></h3>
 				<h3 class="font-weight-bold">배달비 :  <input type="number" class="border-0" id="deliveryPrice"></h3>
 				<h3 class="font-weight-bold">총 결제 금액 : <input type="number" class="border-0" id="totalPrice"></h3>
+				<button class="btn bg-lemon my-4" id="payBtn">결제하기</button>
+				<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+				<!-- <script src="/main.js"></script> -->
 			</div>
+			
 </div>
 
 
@@ -121,6 +125,33 @@
 		}
 		
 		$("#totalPrice").attr("value",  parseInt(ProductPrice)+ parseInt($("#deliveryPrice").val()));
+		
+		
+		IMP.init("imp66851474");
+		const onClickPay = async () => {
+			IMP.request_pay({
+				pg: "kakaopay",
+				pay_method: "card",
+				amout: totalPrice,
+				name: "매운 라면",
+				merchant_uid: "ORD20231030-000001",
+				
+			},function(response){
+				const {status, err_msg} = response;
+				if(err_msg) {
+					alert(err_msg);
+				}
+				if(status === "paid") {
+					const { imp_uid } = response;
+					verifyPayment(imp_uid);
+				}
+			})
+				
+			
+		}
+			
+		$("#payBtn").on("click", onClickPay);
+		
 		
 	});//document
 </script>
