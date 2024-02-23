@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 class="d-flex justify-content-center">주문서 작성</h1>
 <div class="d-flex margin-left my-3 col-10">
-	<table class="table text-center" data-count="${productCount}" id="table" data-user-name="${user.name}" data-cart-list="${cartList}">
+	<table class="table text-center" data-count="${productCount}" id="table" data-user-name="${user.name}" data-product-list="${productList}" data-cart-list="${cartList}">
 			<thead>
 				<th></th>
 				<th>상품사진</th>
@@ -74,7 +74,7 @@
 
 <div class="d-flex justify-content-center margin-left">
 	<div class="col-6 "> 
-		<h3 class="font-weight-bold">주문 상품 금액 : <input type="number" class="border-0" id=productPrice"></h3>
+		<h3 class="font-weight-bold">주문 상품 금액 : <input type="number" class="border-0" id="productPrice"></h3>
 		<h3 class="font-weight-bold">배달비 :  <input type="number" class="border-0" id="deliveryPrice"></h3>
 		<h3 class="font-weight-bold">총 결제 금액 : <input type="number" class="border-0" id="totalPrice"></h3>
 		<button class="btn bg-lemon my-4" id="payBtn">결제하기</button>
@@ -87,7 +87,7 @@
 
 <script>
 	$(document).ready(function(){
-		
+
 		//총 상품 
 		let id = "";
 		let productPrice = 0;
@@ -140,10 +140,12 @@
 			let taker = $("#taker").val();
 			let phoneNumber = $("#phoneNumber").val();
 			let address = $("#address").val();
+			let productList = $("#table").data("product-list");
 			let cartList = $("#table").data("cart-list");
-			let productPrice = $("#productPrice").val();
-			let deliveryPrice = $("#deliveryPrice").val();
+			let productPrice = parseInt($("#productPrice").val());
+			let deliveryPrice = parseInt($("#deliveryPrice").val());
 			
+			console.log(userName +"    "+ phoneNumber +"    "+ address +"    "+ cartList +"    " + productList +"    "+productPrice+"    "+ deliveryPrice);
 			if(!taker){
 				alert("받는사람을 입력하세요");
 				return false;
@@ -176,14 +178,15 @@
 
 					$.ajax({
 						type: "POST",
-						url: '/order/create',
+						url: "/order/create",
 						data: {
 							"userName": userName,
 							"productPrice":productPrice,
 							"deliveryPrice":deliveryPrice,
 							"address":address,
 							"phoneNumber":phoneNumber,
-							"cartList":cartList
+							"productList":productList
+							//"cartList":cartList
 						}
 					});
 				} else {
