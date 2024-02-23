@@ -23,8 +23,8 @@ public class OrderRestController {
 			@RequestParam("deliveryPrice") int deliveryPrice,
 			@RequestParam("address") String address,
 			@RequestParam("phoneNumber") String phoneNumber,
-			@RequestParam("productList") List<ProductEntity> productList
-			//@RequestParam("cartList") List<Cart> cartList
+			@RequestParam("productList") List<ProductEntity> productList,
+			@RequestParam("cartList") List<Cart> cartList
 			){
 		
 		//List<Map<String, Object>> orderList = cartList;

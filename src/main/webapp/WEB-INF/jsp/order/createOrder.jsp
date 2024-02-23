@@ -185,8 +185,8 @@
 							"deliveryPrice":deliveryPrice,
 							"address":address,
 							"phoneNumber":phoneNumber,
-							"productList":productList
-							//"cartList":cartList
+							"productList":productList,
+							"cartList":cartList
 						}
 					});
 				} else {
