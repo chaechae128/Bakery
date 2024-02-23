@@ -64,6 +64,9 @@
 			});
 		});//deleteBtn
 	
+		$("#orderBtn").on('click', function(){
+			//console.log($(""))
+		});//orderBtn
 		
 	});//document
 </script>

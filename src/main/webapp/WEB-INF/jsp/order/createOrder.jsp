@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 class="d-flex justify-content-center">주문서 작성</h1>
-<div class="d-flex margin-left my-3">
-	<table class="table text-center" data-count="${productCount}" id="table">
+<div class="d-flex margin-left my-3 col-10">
+	<table class="table text-center" data-count="${productCount}" id="table" data-user-name="${user.name}" data-cart-list="${cartList}">
 			<thead>
 				<th></th>
 				<th>상품사진</th>
@@ -29,39 +29,31 @@
 			</tbody>
 		</table>
 </div>
-<div class="d-flex justify-content-around col-8 margin-left my-3">
-	<div class="col-4">
+<div class="d-flex justify-content-start  margin-left my-3">
+	<div class="col-5">
 		<h3 class="d-flex justify-content-center">주문하는 분</h3>
 		<div class="d-flex">
-					<table class="text-center table">
-						<tr>
-							<th>이름</th>
-							<td>${user.name}</td>
-						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td>${user.phoneNumber}</td>
-						</tr>
-					</table>
+			<table class="text-center table">
+				<tr>
+					<th>이름</th>
+					<td>${user.name}</td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td>${user.phoneNumber}</td>
+				</tr>
+			</table>
 		</div>
 	</div>
-	<div  class="col-4">
-		<div class="d-flex justify-content-center align-items-center"> 
-		<h3 class="mr-4">결제 수단</h3>
-		<input type='radio' name='payOption' value='card' class="ml-4 mr-2"/><span>카드</span>
-	    <input type='radio' name='payOption' value='deposit' class="mr-2"/><span>무통장입금</span> 
-</div>
-	</div>
-</div>
-<hr>
-<div class="d-flex margin-left justify-content-center col-3 my-3">
-	<h3 class="">받으시는 분</h3>
-	<div class="d-flex ml-3">
-		 <span class="mr-3">내 주소로</span><input type="checkbox" id="my" class="my" name="my" data-user-name="${user.name}" data-user-phone-number="${user.phoneNumber}" data-user-address="${user.address}">
-	</div>
-</div>
-<div class="d-flex justify-content-center margin-left">
-			<table class="text-center col-5 table">
+	<div class="col-5">
+		<div class="d-flex justify-content-center">
+			<h3 class="d-flex justify-content-center">받으시는 분</h3>
+			<div class="d-flex ml-3">
+				 <span class="mr-3">내 주소로</span><input type="checkbox" id="my" class="my" name="my" data-user-name="${user.name}" data-user-phone-number="${user.phoneNumber}" data-user-address="${user.address}">
+			</div>
+		</div>
+		<div>
+		<table class="text-center table">
 				<tr>
 					<th>받는사람 : </th>
 					<td><input type="text" class="border-0" id="taker"></td>
@@ -75,26 +67,53 @@
 					<td><input type="text" class="border-0" id="address"></td>
 				</tr>
 			</table>
-			
-			<div class="col-6 "> 
-			
-				<h3 class="font-weight-bold">주문 상품 금액 : <input type="number" class="border-0" id="ProductPrice"></h3>
-				<h3 class="font-weight-bold">배달비 :  <input type="number" class="border-0" id="deliveryPrice"></h3>
-				<h3 class="font-weight-bold">총 결제 금액 : <input type="number" class="border-0" id="totalPrice"></h3>
-				<button class="btn bg-lemon my-4" id="payBtn">결제하기</button>
-				<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-				<!-- <script src="/main.js"></script> -->
-			</div>
-			
+		</div>
+	</div>
+</div>
+<hr>
+
+<div class="d-flex justify-content-center margin-left">
+	<div class="col-6 "> 
+		<h3 class="font-weight-bold">주문 상품 금액 : <input type="number" class="border-0" id=productPrice"></h3>
+		<h3 class="font-weight-bold">배달비 :  <input type="number" class="border-0" id="deliveryPrice"></h3>
+		<h3 class="font-weight-bold">총 결제 금액 : <input type="number" class="border-0" id="totalPrice"></h3>
+		<button class="btn bg-lemon my-4" id="payBtn">결제하기</button>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+		<!-- <script src="/main.js"></script> -->
+	</div>
 </div>
 
 
 <script>
 	$(document).ready(function(){
+		
+		//총 상품 
+		let id = "";
+		let productPrice = 0;
+		//상품 개수
+		let count = $("#table").data("count");
+		for(let i = 1; i<=count; i++) {
+			let price = parseInt($("#"+i).data("product-price"));
+			productPrice += price;
+			//console.log(totalPrice);
+		}
+		$("#productPrice").attr("value", productPrice);
+		
+		if(productPrice >= 100000) {
+			$("#deliveryPrice").attr("value", 0);
+		} else{
+			$("#deliveryPrice").attr("value", 3000);
+		}
+		
+		$("#totalPrice").attr("value",  parseInt(productPrice)+ parseInt($("#deliveryPrice").val()));
+		
+		//내 주소로
 		$("#my").on('change', function(){
 			//alert("클릭");
 			let chk = $("input[type=checkbox]");
 			if(chk.is(":checked")) {
+
 				$("#taker").attr("value", $(this).data("user-name"));
 				$("#phoneNumber").attr("value", $(this).data("user-phone-number"));
 				$("#address").attr("value", $(this).data("user-address"));
@@ -107,50 +126,73 @@
 			
 		});
 		
-		let id = "";
-		let ProductPrice = 0;
-		//상품 개수
-		let count = $("#table").data("count");
-		for(let i = 1; i<=count; i++) {
-			let price = parseInt($("#"+i).data("product-price"));
-			ProductPrice += price;
-			//console.log(totalPrice);
-		}
-		$("#ProductPrice").attr("value", ProductPrice);
-		
-		if(ProductPrice >= 100000) {
-			$("#deliveryPrice").attr("value", 0);
-		} else{
-			$("#deliveryPrice").attr("value", 3000);
-		}
-		
-		$("#totalPrice").attr("value",  parseInt(ProductPrice)+ parseInt($("#deliveryPrice").val()));
 		
 		
+		//결제
+		var amount = parseInt($("#totalPrice").val());
+		var userName = $("#table").data("user-name");
+
+		var IMP = window.IMP;
 		IMP.init("imp66851474");
-		const onClickPay = async () => {
+		$('#payBtn').on('click',function() {
+			
+			//validation
+			let taker = $("#taker").val();
+			let phoneNumber = $("#phoneNumber").val();
+			let address = $("#address").val();
+			let cartList = $("#table").data("cart-list");
+			let productPrice = $("#productPrice").val();
+			let deliveryPrice = $("#deliveryPrice").val();
+			
+			if(!taker){
+				alert("받는사람을 입력하세요");
+				return false;
+			}
+			if(!phoneNumber){
+				alert("전화번호를 입력하세요");
+				return false;
+			}
+			if(!address){
+				alert("주소를 입력하세요");
+				return false;
+			}
+			
+			
 			IMP.request_pay({
-				pg: "kakaopay",
-				pay_method: "card",
-				amout: totalPrice,
-				name: "매운 라면",
-				merchant_uid: "ORD20231030-000001",
+				pg: 'html5_inicis',
+				pay_method: 'card',
+				merchant_uid: 'merchant_' + new Date().getTime(),
+				name: '베이커리',
+				amount: amount,
+				buyer_email: "",  /*필수 항목이라 "" 로 남겨둠*/
+				buyer_name: userName,
+			}, function(rsp) {
+				console.log(rsp);
 				
-			},function(response){
-				const {status, err_msg} = response;
-				if(err_msg) {
-					alert(err_msg);
+				 //결제 성공 시
+				if (rsp.success) {
+					var msg = '결제가 완료되었습니다.';
+					console.log("결제성공 ");
+
+					$.ajax({
+						type: "POST",
+						url: '/order/create',
+						data: {
+							"userName": userName,
+							"productPrice":productPrice,
+							"deliveryPrice":deliveryPrice,
+							"address":address,
+							"phoneNumber":phoneNumber,
+							"cartList":cartList
+						}
+					});
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
 				}
-				if(status === "paid") {
-					const { imp_uid } = response;
-					verifyPayment(imp_uid);
-				}
-			})
-				
-			
-		}
-			
-		$("#payBtn").on("click", onClickPay);
+				alert(msg);
+			});
+		}); 
 		
 		
 	});//document
