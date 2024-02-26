@@ -78,8 +78,6 @@
 		<h3 class="font-weight-bold">배달비 :  <input type="number" class="border-0" id="deliveryPrice"></h3>
 		<h3 class="font-weight-bold">총 결제 금액 : <input type="number" class="border-0" id="totalPrice"></h3>
 		<button class="btn bg-lemon my-4" id="payBtn">결제하기</button>
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	</div>
 </div>
 
@@ -131,8 +129,6 @@
 		var amount = parseInt($("#totalPrice").val());
 		var userName = $("#table").data("user-name");
 
-		var IMP = window.IMP;
-		IMP.init("imp66851474");
 		$('#payBtn').on('click',function() {
 			
 			//validation
@@ -141,17 +137,6 @@
 			let address = $("#address").val();
 			let productPrice = parseInt($("#productPrice").val());
 			let deliveryPrice = parseInt($("#deliveryPrice").val());
-			
-			//주문 상품, 수량
-			let list = [];
-			let userData = {"userName":userName, "productPrice":productPrice, "deliveryPrice":deliveryPrice, "address":address, "phoneNumber":phoneNumber }
-			list.push(userData);
-
-			for(let i = 1; i<=count; i++) {
-			let orderData = {"productName" : $("#"+i).data("product-name") ,"count" :  parseInt($("#"+i).data("cart-count"))};
-			list.push(orderData);
-			
-			}
 			
 			
 			if(!taker){
@@ -167,38 +152,36 @@
 				return false;
 			}
 			
+			//ajax로 보낼 list
+			let list = [];
 			
-			IMP.request_pay({
-				pg: 'html5_inicis',
-				pay_method: 'card',
-				merchant_uid: 'merchant_' + new Date().getTime(),
-				name: '베이커리',
-				amount: amount,
-				buyer_email: "",  /*필수 항목이라 "" 로 남겨둠*/
-				buyer_name: userName,
-			}, function(rsp) {
-				console.log(rsp);
-				
-				 //결제 성공 시
-				if (rsp.success) {
-					var msg = '결제가 완료되었습니다.';
-					console.log("결제성공 ");
+			//주문한 사람 정보
+			let userData = {"userName":userName, "productPrice":productPrice, "deliveryPrice":deliveryPrice, "address":address, "phoneNumber":phoneNumber }
+			list.push(userData);
 
-					$.ajax({
-						type: "POST",
-						url: "/order/create",
-						contentType: 'application/json',
-					    data: JSON.stringify(list),
-						success:function(data){
-							alert("성공");
-						}
-					});
-				} else {
-					var msg = '결제에 실패하였습니다.';
-					msg += '에러내용 : ' + rsp.error_msg;
+			//주문 상품, 수량
+			for(let i = 1; i<=count; i++) {
+			let orderData = {"productName" : $("#"+i).data("product-name") ,"count" :  parseInt($("#"+i).data("cart-count"))};
+			list.push(orderData);
+			
+			}
+			console.log(list);
+			
+			
+			
+			$.ajax({
+				type: "POST",
+				url: "/order/create",
+				contentType: 'application/json',
+			    data: JSON.stringify(list),
+			    //data:orderList,
+				success:function(data){
+					alert("성공");
 				}
-				alert(msg);
 			});
+			
+			
+			
 		}); 
 		
 		

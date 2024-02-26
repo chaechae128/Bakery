@@ -5,30 +5,27 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bakery.cart.domain.Cart;
-import com.bakery.product.domain.Product;
-import com.bakery.product.entity.ProductEntity;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/order")
 @RestController
 public class OrderRestController {
 	@PostMapping("/create")
 	public Map<String, Object> create(
-			@RequestParam("userName") String userName,
-			@RequestParam("productPrice") int productPrice,
-			@RequestParam("deliveryPrice") int deliveryPrice,
-			@RequestParam("address") String address,
-			@RequestParam("phoneNumber") String phoneNumber,
-			@RequestParam("productList") List<ProductEntity> productList,
-			@RequestParam("cartList") List<Cart> cartList
+			@RequestBody List<Map<String, Object>> list,
+			HttpSession session
 			){
 		
-		//List<Map<String, Object>> orderList = cartList;
-		List<ProductEntity> list = productList;
+		//order db insert
+		int userId = (int)session.getAttribute("userId");
+		int productSellingPrice = (int) list.get(0).get("productPrice");
+		int deliveryPrice = (int) list.get(0).get("deliveryPrice");
+		String address = (String) list.get(0).get("address");
+		String phoneNumber = (String) list.get(0).get("phoneNumber");
 		
 		Map<String, Object> result = new HashMap<>();
 		
@@ -36,4 +33,3 @@ public class OrderRestController {
 		return result;
 	}
 }
-
