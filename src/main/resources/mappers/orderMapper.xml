@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bakery.order.mapper.OrderMapper">
+	<insert id="insertOrder" parameterType="hashmap" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `order`
+		(
+			`userId`
+			,`productSellingPrice`
+			,`deliveryPrice`
+			,`address`
+			,`phoneNumber`
+			,`status`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			,#{productSellingPrice}
+			,#{deliveryPrice}
+			,#{address}
+			,#{phoneNumber}
+			,"주문 접수"
+			,NOW()
+			,NOW()
+		)
+	</insert>
+</mapper>
