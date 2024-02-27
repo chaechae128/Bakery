@@ -97,4 +97,15 @@ public class ProductBO {
 		return productRepository.findByProductName(productName);
 	}
 	
+	
+	public List<ProductEntity> selectProductList (List<Integer> productIdList) {
+		List<ProductEntity> productList = new ArrayList<>();
+		for (int i = 0; i<productIdList.size(); i++) {
+			ProductEntity product = productRepository.findById(productIdList.get(i)).orElse(null);
+			productList.add(product);
+		}
+		
+		return productList;
+	}
+	
 }

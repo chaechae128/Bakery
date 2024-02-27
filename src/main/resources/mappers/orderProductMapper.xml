@@ -17,4 +17,13 @@
 			,NOW()
 		)
 	</insert>
+	
+	<select id="selectOrderProductById" parameterType="int" resultType="com.bakery.order.domain.OrderProduct">
+		SELECT 
+			*
+		FROM
+			`order_product`
+		WHERE
+			`orderId`= #{orderId}
+	</select>
 </mapper>

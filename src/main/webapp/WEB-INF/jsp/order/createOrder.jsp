@@ -189,8 +189,8 @@
 						url: "/order/create",
 						contentType: 'application/json',
 					    data: JSON.stringify(list),
-						success:function(data){
-							alert("성공");
+					    success:function(data){
+							location.href="/order/order-complete-view"
 						}
 					});
 				} else {

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bakery.order.bo.OrderBO;
@@ -35,7 +36,21 @@ public class OrderRestController {
 		result.put("result", "성공");
 		result.put("code", "200");
 		
-
+		return result;
+	}
+	
+	@PostMapping("/order-update-status")
+	public Map<String, Object> updateStatus(
+			@RequestParam("orderId") int orderId,
+			@RequestParam("status") String status) {
+		
+		orderBO.updateOrderStatus(orderId, status);
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "성공");
+		result.put("code", "200");
+		
 		return result;
 	}
 }

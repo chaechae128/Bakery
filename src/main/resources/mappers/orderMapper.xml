@@ -25,4 +25,16 @@
 			,NOW()
 		)
 	</insert>
+	
+	<select id="selectOrder" resultType="com.bakery.order.domain.Order">
+		SELECT * FROM `order`
+	</select>
+	
+	<update id="updateOrderStatus" parameterType="map">
+		UPDATE `order`
+		SET `status`= #{status}
+		WHERE `id`= #{orderId}
+	</update>
+	
+	
 </mapper>
