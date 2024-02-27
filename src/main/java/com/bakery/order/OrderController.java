@@ -29,26 +29,14 @@ public class OrderController {
 	@Autowired
 	private UserBO userBO;
 
-//	@RequestMapping("/order-create-view")
-//	public String orderCreateView(@RequestParam(value = "productIdArray", required = false) String[] productIdArray,
-//			Model model, HttpSession session) {
-//		int userId = (int) session.getAttribute("userId");
-//		List<Cart> cartList = cartBO.selectCarListByUserId(userId);
-//		model.addAttribute("cartList", cartList);
-//
-//		if (productIdArray != null) {
-//			int[] array = new int[productIdArray.length];
-//			for (int i = 0; i < productIdArray.length; i++) {
-//				array[i] = Integer.parseInt(productIdArray[i]);
-//			}
-//			List<ProductEntity> productList = productBO.selectByOrder(array);
-//			model.addAttribute("productList", productList);
-//		}
-//
-//		model.addAttribute("viewName", "/order/createOrder");
-//		return "template/bakeryLayout";
-//	}
 
+	/**
+	 * 주문 하기 화면
+	 * @param choice
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/order-create-view")
 	public String orderCreateView(@RequestParam(value = "choice") List<Integer> choice, Model model, HttpSession session) {
 		int userId = (int) session.getAttribute("userId");
@@ -63,6 +51,12 @@ public class OrderController {
 		model.addAttribute("viewName", "/order/testOrder");
 		model.addAttribute("productList", productList);
 		model.addAttribute("productCount", productList.size());
+		return "template/bakeryLayout";
+	}
+	
+	@RequestMapping("/order-complete-view")
+	public String orderCompleteView(Model model) {
+		model.addAttribute("viewName", "/order/completeOrder");
 		return "template/bakeryLayout";
 	}
 

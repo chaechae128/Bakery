@@ -92,4 +92,9 @@ public class ProductBO {
 		}
 		return productList;
 	}
+	
+	public ProductEntity selectByProductName(String productName) {
+		return productRepository.findByProductName(productName);
+	}
+	
 }

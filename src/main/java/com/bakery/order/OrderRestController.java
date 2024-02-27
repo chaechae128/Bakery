@@ -28,17 +28,12 @@ public class OrderRestController {
 		
 		//order db insert
 		int userId = (int)session.getAttribute("userId");
-		int productSellingPrice = (int) list.get(0).get("productPrice");
-		int deliveryPrice = (int) list.get(0).get("deliveryPrice");
-		String address = (String) list.get(0).get("address");
-		String phoneNumber = (String) list.get(0).get("phoneNumber");
-		
-		//방금 insert한 id
-		int id = orderBO.insertOrder(userId, productSellingPrice, deliveryPrice, address, phoneNumber);
+		orderBO.insertOrder(userId, list);
 		
 		
-		//방금 insert한 행의 id값을 가져와서 order_product db에 저장
 		Map<String, Object> result = new HashMap<>();
+		result.put("result", "성공");
+		result.put("code", "200");
 		
 
 		return result;

@@ -176,7 +176,7 @@
 			    data: JSON.stringify(list),
 			    //data:orderList,
 				success:function(data){
-					alert("성공");
+					location.href="/order/order-complete-view"
 				}
 			});
 			
