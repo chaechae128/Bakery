@@ -76,4 +76,9 @@ public class UserBO {
 		return userMapper.updateUser(userId, upEmail, upNumber, upAddress);
 	}
 	
+	//intput:userId
+	public int deleteUserByUserId(int userId) {
+		return userMapper.deleteUserByUserId(userId);
+	}
+	
 }

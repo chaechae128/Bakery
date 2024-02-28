@@ -2,10 +2,10 @@ package com.bakery.user;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bakery.certification.bo.CertificationBO;
 import com.bakery.certification.bo.MailBO;
 import com.bakery.certification.domain.Certification;
-import com.bakery.certification.domain.Mail;
 import com.bakery.common.EncryptUtils;
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
@@ -229,6 +228,14 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 회워 정보 수정
+	 * @param upEmail
+	 * @param upNumber
+	 * @param upAddress
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("update")
 	public Map<String, Object> update(
 			@RequestParam("upEmail") String upEmail,
@@ -250,4 +257,30 @@ public class UserRestController {
 		}
 		return result;
 	}
+	
+	
+	@DeleteMapping("withdraw")
+	public Map<String, Object> withdraw(
+			@RequestParam("userId") int userId,
+			HttpSession session){
+		
+		//db delete
+		int count = userBO.deleteUserByUserId(userId);
+		
+		session.removeAttribute("userId");
+		session.removeAttribute("userLoginId");
+		session.removeAttribute("userName");
+		
+		//count 가 0이 아니면 성공
+		Map<String, Object> result = new HashMap<>();
+		if(count > 0) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("result", "실패");
+		}
+		return result;
+	}
+	
 }

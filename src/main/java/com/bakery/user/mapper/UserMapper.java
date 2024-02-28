@@ -48,4 +48,6 @@ public interface UserMapper {
 			@Param("upEmail")String upEmail, 
 			@Param("upNumber")String upNumber, 
 			@Param("upAddress")String upAddress);
+	
+	public int deleteUserByUserId(int userId);
 }

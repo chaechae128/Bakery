@@ -45,13 +45,31 @@
 		
 		<div class="d-flex justify-content-center">
 			<button id="updateUserBtn" class="bg-lemon m-4 border-0 p-2" >회원 정보 수정</button>
-			<button id="signOutBtn" class="bg-lemon m-4 border-0 p-2">회원 탈퇴 </button>
+			<button id="signOutBtn" class="bg-lemon m-4 border-0 p-2" data-user-id="${user.id}" data-toggle="modal" data-target="#modal">회원 탈퇴 </button>
 			<button id="updateOkBtn" class="bg-lemon m-4 border-0 p-2 d-none">수정 완료</button>
 		</div>
 	</div>
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">회원 탈퇴</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        회원을 탈퇴하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary " data-dismiss="modal">취소하기</button>
+        <button type="button" class="btn btn-primary signOutBtn">탈퇴하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 	$(document).ready(function(){
@@ -111,5 +129,29 @@
 			
 		});//updateOkBtn
 		
+		
+		$("#modal .signOutBtn").on('click', function(e) {
+			e.preventDefault(); // a 태그 위로 올라가는 현상 방지
+			
+			let userId = $("#signOutBtn").data("user-id");
+			//alert(userId);
+			
+			$.ajax({
+				type:"DELETE"
+				,url:"/user/withdraw"
+				,data:{"userId":userId}
+				,success:function(data){
+					if(data.code == 200){
+						location.href="/bakery/home-view"
+					}else{
+						alert(data.error_message)
+					}
+				}
+				,error:function(request, status, error){
+					alert("회원 탈퇴에 실패했습니다");
+				}
+			});//ajax			
+			
+		});//signOutBtn
 	});
 </script>
