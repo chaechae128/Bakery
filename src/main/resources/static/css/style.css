@@ -53,3 +53,14 @@ footer{
 .margin-left {
 	margin-left: 250px;
 }
+.font-gray {
+	color: gray;
+}
+.bg-gray{
+	background-color: #AAA;
+}
+
+#updateUser {
+	width: 700px;
+	height: 500px;
+}
