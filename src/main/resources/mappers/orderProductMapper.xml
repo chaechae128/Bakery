@@ -26,4 +26,11 @@
 		WHERE
 			`orderId`= #{orderId}
 	</select>
+	
+	<select id="selectOrderProduct" resultType="com.bakery.order.domain.OrderProduct">
+		SELECT 
+			*
+		FROM
+			`order_product`
+	</select>
 </mapper>

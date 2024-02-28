@@ -71,5 +71,9 @@ public class OrderBO {
 		orderMapper.updateOrderStatus(orderId, status);
 	}
 	
+	public List<Order> selectOrderByUserId(int userId) {
+		return orderMapper.selectOrderByUserId(userId);
+	}
+	
 	
 }

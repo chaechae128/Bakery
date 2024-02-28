@@ -90,7 +90,12 @@ public class OrderController {
 		return "template/managerLayout";
 	}
 	
-	
+	/**
+	 * 관리자 - 주문 상세 관리 
+	 * @param orderId
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/order-detail-view")
 	public String orderDetailView(
 			@RequestParam("orderId") int orderId,
@@ -109,5 +114,18 @@ public class OrderController {
 		model.addAttribute("viewName", "/order/orderDetail");
 		return "template/bakeryLayout";
 	}
+	
+	@RequestMapping("/my-order-list-view")
+	public String myOrderListView(Model model
+			,HttpSession session) {
+		int userId = (int)session.getAttribute("userId");
+		List<Order> orderList = orderBO.selectOrderByUserId(userId);
+		List<OrderProduct> orderProductList = orderProductBO.selectOrderProduct();
+		model.addAttribute("viewName", "/myPage/order");
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("orderProductList",orderProductList);
+		return "template/bakeryLayout";
+	}
+	
 
 }

@@ -18,4 +18,5 @@ public interface OrderMapper {
 			@Param("orderId")int orderId, 
 			@Param("status")String status);
 	
+	public List<Order> selectOrderByUserId(int userId);
 }

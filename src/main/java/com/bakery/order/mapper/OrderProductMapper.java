@@ -16,4 +16,6 @@ public interface OrderProductMapper {
 			@Param("count")int count);
 	
 	public List<OrderProduct> selectOrderProductById (int orderId);
+	
+	public List<OrderProduct> selectOrderProduct();
 }
