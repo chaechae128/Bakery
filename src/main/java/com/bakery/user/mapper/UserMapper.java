@@ -42,4 +42,10 @@ public interface UserMapper {
 			@Param("password")String password);
 	
 	public User selectByUserId(int userId);
+	
+	public int updateUser(
+			@Param("userId")int userId, 
+			@Param("upEmail")String upEmail, 
+			@Param("upNumber")String upNumber, 
+			@Param("upAddress")String upAddress);
 }

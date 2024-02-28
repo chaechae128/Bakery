@@ -206,7 +206,13 @@ public class UserRestController {
 		return result;
 	}
 	
-	
+	/**
+	 * 비밀번호 재설정
+	 * @param password
+	 * @param session
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	@RequestMapping("/reset-password")
 	public Map<String, Object> resetPassword(
 			@RequestParam("password") String password,
@@ -223,4 +229,25 @@ public class UserRestController {
 		return result;
 	}
 	
+	@RequestMapping("update")
+	public Map<String, Object> update(
+			@RequestParam("upEmail") String upEmail,
+			@RequestParam("upNumber") String upNumber,
+			@RequestParam("upAddress") String upAddress,
+			HttpSession session){
+		int userId = (Integer)session.getAttribute("userId");
+		
+		//db insert
+		int count = userBO.updateUser(userId, upEmail, upNumber, upAddress);
+		//count 가 0이 아니면 성공
+		Map<String, Object> result = new HashMap<>();
+		if(count > 0) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("result", "실패");
+		}
+		return result;
+	}
 }

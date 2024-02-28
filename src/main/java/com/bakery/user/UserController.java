@@ -164,7 +164,12 @@ public class UserController {
 	@GetMapping("/myPage") 
 	public String myPage(
 			@RequestParam("userId") int userId,
-			Model model) {
+			Model model,
+			HttpSession session) {
+		int userid = (int) session.getAttribute("userId");
+		User user = userBO.selectByUserId(userid);
+		
+		model.addAttribute("user", user);
 		model.addAttribute("viewName", "/myPage/userInformation");
 		return "template/bakeryLayout";
 	}

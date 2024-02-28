@@ -66,8 +66,14 @@ public class UserBO {
 		userMapper.updatePassword(userId, password);
 	}
 	
+	//input:userId
 	public User selectByUserId(int userId) {
 		return userMapper.selectByUserId(userId);
+	}
+	
+	//input:  userId,  upEmail,  upNumber,  upAddress 	output:성공한 행
+	public int updateUser(int userId, String upEmail, String upNumber, String upAddress) {
+		return userMapper.updateUser(userId, upEmail, upNumber, upAddress);
 	}
 	
 }

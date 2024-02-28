@@ -107,4 +107,14 @@
  			`id` = #{userId}
 
  	</select>
+ 	
+ 	<update id="updateUser" parameterType="map">
+ 		UPDATE `user`
+ 		SET	
+ 			`email` = #{upEmail}
+ 			,`phoneNumber` = #{upNumber}
+ 			,`address` = #{upAddress}
+ 		WHERE
+ 			`id` = #{userId}
+ 	</update>
  </mapper>
