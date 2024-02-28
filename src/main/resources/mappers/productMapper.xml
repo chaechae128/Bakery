@@ -81,4 +81,12 @@
  	<select id="selectAll" resultType="com.bakery.product.domain.Product">
  		SELECT * FROM `product`
  	</select>
+ 	
+ 	<update id="updateBuyCount" parameterType="map"> 
+ 		UPDATE `product`
+   		SET
+   			`buyCount` = #{buyCount}
+   		WHERE
+   			`id` = #{productId}
+ 	</update>
  </mapper>

@@ -58,4 +58,9 @@ public class ProductAdminBO {
 			fileManagerService.deleteFile(product.getImagePath());
 		}
 	}
+	
+	public void addBuyCount (int productId, int buyCount) {
+		productMapper.updateBuyCount(productId, buyCount);
+	}
+	
 }

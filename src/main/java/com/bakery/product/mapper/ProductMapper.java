@@ -35,5 +35,8 @@ public interface ProductMapper {
 	
 	public List<Product> selectAll();
 	
+	public void updateBuyCount (
+			@Param("productId")int productId,
+			@Param("buyCount")int buyCount);
 
 }

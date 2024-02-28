@@ -51,4 +51,7 @@ public class ProductEntity {
 	@Column(name="updatedAt")
 	@UpdateTimestamp
 	private ZonedDateTime updatedAt;
+	
+	@Column(name="buyCount")
+	private int buyCount;
 }

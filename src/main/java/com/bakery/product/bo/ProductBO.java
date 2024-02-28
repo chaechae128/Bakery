@@ -10,6 +10,7 @@ import com.bakery.cart.domain.Cart;
 import com.bakery.like.domain.Like;
 import com.bakery.like.mapper.LikeMapper;
 import com.bakery.product.entity.ProductEntity;
+import com.bakery.product.mapper.ProductMapper;
 import com.bakery.product.repository.ProductRepository;
 
 @Service
@@ -19,6 +20,8 @@ public class ProductBO {
 	
 	@Autowired
 	private LikeMapper likeMapper;
+	
+	
 	
 	//메뉴 - cake
 	public List<ProductEntity> findByCategory(String category) {
@@ -107,5 +110,6 @@ public class ProductBO {
 		
 		return productList;
 	}
+	
 	
 }

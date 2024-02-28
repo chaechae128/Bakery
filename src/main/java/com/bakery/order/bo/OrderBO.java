@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bakery.administration.bo.ProductAdminBO;
 import com.bakery.cart.bo.CartBO;
 import com.bakery.order.domain.Order;
 import com.bakery.order.mapper.OrderMapper;
@@ -27,6 +28,8 @@ public class OrderBO {
 	@Autowired
 	private CartBO cartBO;
 	
+	@Autowired
+	private ProductAdminBO productAdminBO;
 	
 	public void insertOrder(int userId, List<Map<String, Object>> list) {
 		
@@ -53,6 +56,9 @@ public class OrderBO {
 			int count =  (int) list.get(i).get("count");
 			orderProductBO.insertOrderProduct(orderId, productId, count);
 			cartBO.deleteCartByUserIdProductId(userId, productId);
+			
+			int buyCount = product.getBuyCount() + count;
+			productAdminBO.addBuyCount(productId, buyCount);
 		}
 	}
 	
