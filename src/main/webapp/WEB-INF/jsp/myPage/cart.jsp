@@ -27,7 +27,7 @@
 		<div class="margin-left"><h1>장바구니 목록</h1></div>
 		<hr>
 		<div class="d-flex justify-content-center">
-			<form action="/order/order-create-view" method="post">
+			<form action="/order/cart-to-order-create-view" method="post">
 				<table class="table text-center ">
 					<thead>
 						<th></th>

@@ -7,24 +7,25 @@
 		<img src="${product.imagePath}" width="300px">
  	</div>
  	<div class="margin-40">
+ 		<form action="/order/cart-to-order-create-view" method="post">
  		<h1 class="font-weight-bold display-3">${product.productName}</h1>
  		<div class="d-flex justify-content-center">
  			<h4 class="text-danger  mx-3">할인율</h4>
  			<h6 class="mx-3"><del>${product.costPrice}</del></h6>
  			<h2 class="font-weight-bold display-6 mx-3">${product.sellingPrice}원</h2>
  		</div>
- 		
+ 		<input type="hidden" value="${product.id}" name="productId" id="productId">
  		<%--수량 체크 --%>
  		<div class="my-3 d-flex justify-content-center">
-	 		<button class="border-0" id="minusBtn"><img src="/static/image/minus.jpg" width="30px"></button>
+	 		<a href="#" class="btn border-0" id="minusBtn"><img src="/static/image/minus.jpg" width="30px"></a>
 	 		<input type="text" id="count" name="count" value="1" class="text-center">
-	 		<button class="border-0" id="plusBtn"><img src="/static/image/plus.jpg" width="30px"></button>
+	 		<a href="#" class="btn border-0" id="plusBtn"><img src="/static/image/plus.jpg" width="30px"></a>
  		</div>
  		
  		<div class="d-flex justify-content-center">
 	 		<button class="bg-lemon border-0" id="buyBtn">구매하기</button>
  		</div>
- 		
+ 		</form>	
  		<div class="d-flex mt-3 justify-content-center"> 
 	 		<c:choose>
 	 			<%--하트가 채워져 있을 때 --%>
@@ -46,7 +47,7 @@
 			</c:choose>
 			<button class="bg-lemon border-0 mr-3" id="cartBtn" data-product-id="${product.id}">장바구니</button>
  		</div>
-
+		
  	</div>
 </div>
 
@@ -133,6 +134,10 @@
 			});//ajax
 			
 		});//cartBtn
+		
+		$("#buyBtn").on('click', function(){
+			
+		});//buyBtn
 		
 	});//document
 

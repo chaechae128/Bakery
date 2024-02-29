@@ -3,17 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 class="d-flex justify-content-center">주문서 작성</h1>
 <div class="d-flex margin-left my-3 col-10">
-	<table class="table text-center" data-count="${productCount}" id="table" data-user-name="${user.name}" data-product-list="${productList}" data-cart-list="${cartList}">
+	<table class="table text-center"  id="table" data-user-name="${user.name}" data-product-list="${productList}" data-cart-list="${cartList}">
 			<thead>
 				<th></th>
 				<th>상품사진</th>
 				<th>상품명</th>
 				<th>수량</th>
 				<th>상품 금액</th>
-				<th></th>
+				<th>${product.id}</th>
 			</thead>
-			<tbody>
-				<c:forEach items="${cartList}" var="cart">
+			<tbody id="tbody" data-count="${productCount}">
+			<!-- 장바구니 -> 구매하기 --> 
+				<c:if test="${not empty cartList}">
+					<c:forEach items="${cartList}" var="cart">
 					<c:forEach items="${productList}" var="product" varStatus="status">
 						<tr>
 							<c:if test="${cart.productId eq product.id}">
@@ -25,7 +27,18 @@
 							</c:if>
 						</tr>
 					</c:forEach>
-				</c:forEach>
+					</c:forEach>
+				</c:if>
+				<!-- 상품 상세 페이지 -> 구매하기 -->
+				<c:if test="${not empty product}">
+				<tr>
+					<td>1</td>
+					<td><a href="/product/product-detail-view?productId=${product.id}"><img src="${product.imagePath}" width="100px"></a></td>
+					<td>${product.productName}</td>
+					<td>${count}</td>
+					<td id="1" class="price" data-product-name="${product.productName}"  data-cart-count="${count}" data-product-price="${product.sellingPrice * count}" data-product-id="${product.id}">${product.sellingPrice} * ${count} = ${product.sellingPrice * count}</td>
+				</tr>
+				</c:if>
 			</tbody>
 		</table>
 </div>
@@ -91,7 +104,8 @@
 		let id = "";
 		let productPrice = 0;
 		//상품 개수
-		let count = $("#table").data("count");
+		let count = $("#tbody").data("count");
+		//console.log(count);
 		for(let i = 1; i<=count; i++) {
 			let price = parseInt($("#"+i).data("product-price"));
 			productPrice += price;

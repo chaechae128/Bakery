@@ -43,26 +43,38 @@ public class OrderController {
 
 
 	/**
-	 * 주문 하기 화면
+	 * 장바구니에서 주문 하기 화면
 	 * @param choice
 	 * @param model
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/order-create-view")
-	public String orderCreateView(@RequestParam(value = "choice") List<Integer> choice, Model model, HttpSession session) {
+	@RequestMapping("/cart-to-order-create-view")
+	public String cartToOrderCreateView(@RequestParam(value = "choice", required=false) List<Integer> choice,
+			@RequestParam(value = "count", required=false) Integer count,
+			@RequestParam(value = "productId", required=false) Integer productId,
+			Model model, HttpSession session) {
 		int userId = (int) session.getAttribute("userId");
 		User user = userBO.selectByUserId(userId);
 		model.addAttribute("user", user);
+		if(choice != null) {
+			List<Cart> cartList = cartBO.selectCarListByUserId(userId);
+			model.addAttribute("cartList", cartList);
+			List<ProductEntity> productList = productBO.selectByOrder(choice);
+			model.addAttribute("productList", productList);
+			model.addAttribute("productCount", productList.size());
+			
+		} else {
+			ProductEntity product = productBO.selectByProductId(productId);
+			model.addAttribute("product", product);
+			model.addAttribute("count", count);
+			model.addAttribute("productCount", 1);
+			
+		}
 		
-		List<Cart> cartList = cartBO.selectCarListByUserId(userId);
-		model.addAttribute("cartList", cartList);
-		
-		List<ProductEntity> productList = productBO.selectByOrder(choice);
 		model.addAttribute("viewName", "/order/createOrder");
 		//model.addAttribute("viewName", "/order/testOrder");
-		model.addAttribute("productList", productList);
-		model.addAttribute("productCount", productList.size());
+		
 		return "template/bakeryLayout";
 	}
 	
@@ -127,5 +139,22 @@ public class OrderController {
 		return "template/bakeryLayout";
 	}
 	
+	/*
+	 * @RequestMapping("/order-create-view") public String
+	 * orderCreateView(@RequestParam(value = "choice") List<Integer> choice, Model
+	 * model, HttpSession session) { int userId = (int)
+	 * session.getAttribute("userId"); User user = userBO.selectByUserId(userId);
+	 * model.addAttribute("user", user);
+	 * 
+	 * List<Cart> cartList = cartBO.selectCarListByUserId(userId);
+	 * model.addAttribute("cartList", cartList);
+	 * 
+	 * List<ProductEntity> productList = productBO.selectByOrder(choice);
+	 * model.addAttribute("viewName", "/order/createOrder");
+	 * //model.addAttribute("viewName", "/order/testOrder");
+	 * model.addAttribute("productList", productList);
+	 * model.addAttribute("productCount", productList.size()); return
+	 * "template/bakeryLayout"; }
+	 */
 
 }
