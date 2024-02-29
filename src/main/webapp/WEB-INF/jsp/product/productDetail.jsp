@@ -7,7 +7,7 @@
 		<img src="${product.imagePath}" width="300px">
  	</div>
  	<div class="margin-40">
- 		<form action="/order/cart-to-order-create-view" method="post">
+ 		<form action="/order/order-create-view" method="post">
  		<h1 class="font-weight-bold display-3">${product.productName}</h1>
  		<div class="d-flex justify-content-center">
  			<h4 class="text-danger  mx-3">할인율</h4>

@@ -19,7 +19,7 @@
 		
 		<div class="m-3">
 			<h3>개인 정보</h3>
-			<div class="m-3"><a href="/user/user-update-view" class="font-gray">회원 정보 수정</a></div>
+			<div class="m-3"><a href="/user/myPage?userId=${userId}" class="font-gray">회원 정보 수정</a></div>
 		</div>
 	</div>
 	
@@ -27,7 +27,7 @@
 		<div class="margin-left"><h1>장바구니 목록</h1></div>
 		<hr>
 		<div class="d-flex justify-content-center">
-			<form action="/order/cart-to-order-create-view" method="post">
+			<form action="/order/order-create-view" method="post">
 				<table class="table text-center ">
 					<thead>
 						<th></th>

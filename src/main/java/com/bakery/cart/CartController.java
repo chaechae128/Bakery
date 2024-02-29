@@ -30,6 +30,7 @@ public class CartController {
 		int userId = (int)session.getAttribute("userId");
 		List<Cart> cartList = cartBO.selectCarListByUserId(userId);
 		List<ProductEntity> productList = productBO.selectBycartList(cartList);
+		model.addAttribute("userId", userId);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("productList", productList);
 		model.addAttribute("viewName", "/myPage/cart");

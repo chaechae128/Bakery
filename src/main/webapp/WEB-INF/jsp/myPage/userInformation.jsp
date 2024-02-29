@@ -17,7 +17,7 @@
 		
 		<div class="m-3">
 			<h3>개인 정보</h3>
-			<div class="m-3"><a href="/user/user-update-view" class="font-gray">회원 정보 수정</a></div>
+			<div class="m-3"><a href="/user/myPage?userId=${user.id}" class="font-gray">회원 정보 수정</a></div>
 		</div>
 	</div>
 

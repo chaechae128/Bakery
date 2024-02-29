@@ -33,7 +33,8 @@ public class LikeController {
 		List<ProductEntity> productList = productBO.selectBylikeList(likeList);
 		model.addAttribute("productList", productList);
 		model.addAttribute("viewName", "/myPage/like");
-		
+		model.addAttribute("userId", userId);
+
 		return "template/bakeryLayout";
 	}
 }

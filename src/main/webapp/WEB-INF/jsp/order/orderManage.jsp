@@ -50,7 +50,7 @@
 					        <button class="btn updateOrderBtn bg-lemon" id="${order.id}">수정</button>
 					        <input type="hidden" value="${order.id}" name="orderId" id="orderId">
 					     </td>
-						<td>${order.createdAt}</td>
+						<td><fmt:formatDate value="${order.createdAt}" pattern="yyyy년 M월 dd일" /></td>
 					</tr>
 				
 			</c:forEach>
