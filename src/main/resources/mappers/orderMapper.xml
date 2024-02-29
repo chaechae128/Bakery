@@ -38,12 +38,7 @@
 	
 	<select id="selectOrderByUserId" parameterType="int">
 		SELECT 
-			`productSellingPrice`
-			,`deliveryPrice`
-			,`address`
-			,`phoneNumber`
-			,`status`
-			,`createdAt`
+			*
 		FROM 
 			`order`
 		WHERE
