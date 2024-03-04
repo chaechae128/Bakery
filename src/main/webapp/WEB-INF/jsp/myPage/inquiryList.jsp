@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <div class="d-flex">
 	<!-- 메뉴 -->
 	<jsp:include page="../include/myPageMenu.jsp" />
     	
     <!-- 글 목록 -->
-   	<div class="margin-left">
+   	<div class="margin-left col-8 margin-right">
    		<h3>작성한 문의글</h3>
    		
    		<!-- 글 목록 -->
@@ -18,11 +20,13 @@
    				</thead>
    					
    				<tbody>
-   					<tr>
-   						<td>1</td>
-   						<td><a href="#">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</a></td>
-   						<td></td>
-   					</tr>
+   					<c:forEach items="${inquiryList}" var="inquiry" varStatus="status">
+	   					 <tr>
+	   						<td>${status.count}</td>
+	   						<td><a href="/inquiry/inquiry-detail-view?inquiryId=${inquiry.id}">${inquiry.subject}</a></td>
+	   						<td><fmt:formatDate value="${inquiry.createdAt}" pattern="yyyy년 M월 dd일" /></td>
+	   					</tr>
+   					</c:forEach>
    				</tbody>
    			</table>
    		</div>

@@ -22,4 +22,27 @@
 			,NOW()
 		)
 	</insert>
+	
+	<select id="selectInquiryByUserId" parameterType="int" resultType="com.bakery.inquiry.domain.Inquiry">
+		SELECT * FROM `inquiry`
+		WHERE
+			`userId` = #{userId}
+	</select>
+	
+	<select id="selectInquiryById" parameterType="int" resultType="com.bakery.inquiry.domain.Inquiry">
+		SELECT * FROM `inquiry`
+		WHERE
+			`id` = #{inquiryId}
+	</select>
+	
+	<update id="updateInquiry"  parameterType="map">
+		UPDATE `inquiry`
+ 		SET	
+ 			`subject` = #{subject}
+ 			,`content` = #{content}
+ 			,`imagePath` = #{imagePath}
+ 			,`updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{inquiryId}
+	</update>
 </mapper>
