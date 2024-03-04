@@ -32,7 +32,9 @@
 	
 	<update id="updateOrderStatus" parameterType="map">
 		UPDATE `order`
-		SET `status`= #{status}
+		SET 
+			`status`= #{status}
+			,`updatedAt` = NOW()
 		WHERE `id`= #{orderId}
 	</update>
 	

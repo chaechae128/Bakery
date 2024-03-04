@@ -92,7 +92,9 @@
  	
  	<update id="updatePassword" parameterType="Map">
  		UPDATE `user`
- 		SET	`password` = #{password}
+ 		SET	
+ 			`password` = #{password}
+ 			,`updatedAt` = NOW()
  		WHERE
  			`id` = #{userId}
  		

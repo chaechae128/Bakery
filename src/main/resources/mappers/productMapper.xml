@@ -87,6 +87,7 @@
    		SET
    			`buyCount` = #{buyCount}, 
    			`stock` = #{stock}
+   			,`updatedAt` = NOW()
    		WHERE
    			`id` = #{productId}
  	</update>
