@@ -46,7 +46,7 @@ public class UserController {
 	public String signInView(Model model, HttpSession session) {
 		model.addAttribute("viewName", "/user/signIn");
 		String userName = (String) session.getAttribute("userName");
-		String userId = (String) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute("userId");
 		model.addAttribute("userName", userName);
 		model.addAttribute("userId", userId);
 		return "template/bakeryLayout";

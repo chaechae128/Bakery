@@ -33,7 +33,7 @@ public class ProductBO {
 			return productRepository.findAll(); 
 			
 		} else if (menu.equals("Best")) {
-			return productRepository.findTop10ByOrderByCreatedAtDesc(); 
+			return productRepository.findTop10ByOrderByBuyCountDesc(); 
 			
 		} else if (menu.equals("New")) {
 			return productRepository.findTop10ByOrderByCreatedAtDesc(); 

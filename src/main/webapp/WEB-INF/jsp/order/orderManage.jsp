@@ -82,7 +82,7 @@
 				,success:function(data) {
 					if(data.code == 200) {
 						alert("주문 상태 수정이 완료되었습니다");
-						href.reload();
+						location.reload();
 					} else {
 						alert(data.error_message);
 					}

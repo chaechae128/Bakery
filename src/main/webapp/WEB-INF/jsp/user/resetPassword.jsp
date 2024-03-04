@@ -46,7 +46,7 @@
             ,success:function(data){
                if(data.code == 200){
             	  alert("비밀번호가 변경 되었습니다 로그인을 해주세요");
-                  location.href="/user/sign-in-view";
+            	  location.href="/user/sign-in-view";
                }else{
             	   alert(data.error_message);
                }
