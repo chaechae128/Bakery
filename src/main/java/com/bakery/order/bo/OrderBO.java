@@ -57,9 +57,9 @@ public class OrderBO {
 			orderProductBO.insertOrderProduct(orderId, productId, count);
 			cartBO.deleteCartByUserIdProductId(userId, productId);
 			 
-			//주문시 buyCount는 +1  stock는 -1
+			//주문시 buyCount는 +count stock는 -count
 			int buyCount = product.getBuyCount() + count;
-			int stock = product.getStock() -1;
+			int stock = product.getStock() -count;
 			productAdminBO.updateButCountStock(productId, buyCount, stock);
 			
 		}
