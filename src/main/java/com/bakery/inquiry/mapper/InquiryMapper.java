@@ -27,4 +27,10 @@ public interface InquiryMapper {
 			@Param("subject")String subject, 
 			@Param("content")String content,
 			@Param("imagePath")String imagePath);
+	
+	public List<Inquiry> selectInquiryList ();
+	
+	public int updateReplyById (
+			@Param("inquiryId")int inquiryId, 
+			@Param("reply")String reply);
 }

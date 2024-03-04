@@ -45,4 +45,17 @@
  		WHERE
  			`id` = #{inquiryId}
 	</update>
+	
+	<select id="selectInquiryList" resultType="com.bakery.inquiry.domain.Inquiry">
+		SELECT * FROM `inquiry`
+	</select>
+	
+	<update id="updateReplyById" parameterType="map">
+		UPDATE `inquiry`
+ 		SET
+ 			`reply` = #{reply}
+ 			,`updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{inquiryId}
+	</update>
 </mapper>

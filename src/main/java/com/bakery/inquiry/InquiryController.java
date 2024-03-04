@@ -53,6 +53,13 @@ public class InquiryController {
 		return "template/bakeryLayout";
 	}
 	
+	/**
+	 * 회원 문의글 자세히
+	 * @param model
+	 * @param session
+	 * @param inquiryId
+	 * @return
+	 */
 	@GetMapping("/inquiry-detail-view")
 	public String inquiryDetailView(Model model,
 			HttpSession session,
@@ -63,5 +70,28 @@ public class InquiryController {
 		model.addAttribute("viewName", "/myPage/inquiryDetail");
 		return "template/bakeryLayout";
 		
+	}
+	
+	/**
+	 * 관리자 - 문의글 리스트
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/inquiry-manage-view")
+	public String inquiryManageView (Model model) {
+		List<Inquiry> inquiryList = inquiryBO.selectInquiryList();
+		model.addAttribute("inquiryList", inquiryList);
+		model.addAttribute("viewName", "/inquiry/inquiryManage");
+		return "template/managerLayout";
+	}
+	
+	@GetMapping("/inquiry-reply-view")
+	public String inquiryReplyView(Model model,
+			@RequestParam("inquiryId") int inquiryId) {
+		Inquiry inquiry = inquiryBO.selectInquiryById(inquiryId);
+		
+		model.addAttribute("inquiry", inquiry);
+		model.addAttribute("viewName", "/inquiry/inquiryReply");
+		return "template/managerLayout";
 	}
 }

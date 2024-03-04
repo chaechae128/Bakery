@@ -59,4 +59,14 @@ public class InquiryBO {
 		
 		return inquiryMapper.updateInquiry(inquiryId, subject, content, imagePath);
 	}
+	
+	//input:x output:List<Inquiry>
+	public List<Inquiry> selectInquiryList () {
+		return inquiryMapper.selectInquiryList();
+	}
+	
+	//input: inquiryId, reply 
+	public int updateReplyById (int inquiryId, String reply) {
+		return inquiryMapper.updateReplyById(inquiryId, reply);
+	}
 }

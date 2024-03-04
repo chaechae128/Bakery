@@ -56,6 +56,15 @@ public class InquiryRestController {
 		return result;
 	}
 	
+	/**
+	 * 문의글 수정 API
+	 * @param inquiryId
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/update")
 	public Map<String, Object> update (
 			@RequestParam("inquiryId") int inquiryId,
@@ -84,6 +93,27 @@ public class InquiryRestController {
 			result.put("error_message", "실패");
 		}
 		return result;
+	}
+	
+	
+	@RequestMapping("/reply")
+	public Map<String, Object> reply(
+			@RequestParam("inquiryId") int inquiryId,
+			@RequestParam("reply") String reply
+			) {
+		Map<String, Object> result = new HashMap<>();
+		//db update
+		int count = inquiryBO.updateReplyById(inquiryId, reply);
+		
+		if (count > 0) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "실패");
+		}
+		return result;
 		
 	}
+	
 }
