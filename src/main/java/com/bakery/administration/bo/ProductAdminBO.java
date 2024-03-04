@@ -59,8 +59,10 @@ public class ProductAdminBO {
 		}
 	}
 	
-	public void addBuyCount (int productId, int buyCount) {
-		productMapper.updateBuyCount(productId, buyCount);
+	public void updateButCountStock (int productId, int buyCount, int stock) {
+		productMapper.updateButCountStock(productId, buyCount, stock);
 	}
+	
+	
 	
 }

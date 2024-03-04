@@ -56,9 +56,12 @@ public class OrderBO {
 			int count =  (int) list.get(i).get("count");
 			orderProductBO.insertOrderProduct(orderId, productId, count);
 			cartBO.deleteCartByUserIdProductId(userId, productId);
-			
+			 
+			//주문시 buyCount는 +1  stock는 -1
 			int buyCount = product.getBuyCount() + count;
-			productAdminBO.addBuyCount(productId, buyCount);
+			int stock = product.getStock() -1;
+			productAdminBO.updateButCountStock(productId, buyCount, stock);
+			
 		}
 	}
 	

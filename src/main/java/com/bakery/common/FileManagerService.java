@@ -20,10 +20,10 @@ public class FileManagerService {
 	//실제  업로드 된 이미지가 저장될 경로(서버의 주소)
 	
 	//학원용
-	//public static final String FILE_UPLOAD_PATH = "D:\\kimchaeyeon\\7_bakery_project\\bakery\\bakery_workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "D:\\kimchaeyeon\\7_bakery_project\\bakery\\bakery_workspace\\images/";
 	
 	//집용
-	public static final String FILE_UPLOAD_PATH = "C:\\Users\\mouse\\OneDrive\\바탕 화면\\mega_백엔드\\bakery_notebook\\workspace\\images/";
+	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\mouse\\OneDrive\\바탕 화면\\mega_백엔드\\bakery_notebook\\workspace\\images/";
 	
 	//input:File(원본) multipart, userLoginId(폴더명) output:이미지 경로
 	public String saveFile(MultipartFile file) {

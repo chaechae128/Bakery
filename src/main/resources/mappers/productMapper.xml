@@ -82,10 +82,11 @@
  		SELECT * FROM `product`
  	</select>
  	
- 	<update id="updateBuyCount" parameterType="map"> 
+ 	<update id="updateButCountStock" parameterType="map"> 
  		UPDATE `product`
    		SET
-   			`buyCount` = #{buyCount}
+   			`buyCount` = #{buyCount}, 
+   			`stock` = #{stock}
    		WHERE
    			`id` = #{productId}
  	</update>
