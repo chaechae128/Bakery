@@ -24,6 +24,12 @@ public class CartController {
 	@Autowired
 	private ProductBO productBO;
 	
+	/**
+	 * 내 장바구니 목록 화면
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/cart-list-view")
 	public String productManageView(Model model
 			,HttpSession session) {

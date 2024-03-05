@@ -95,7 +95,12 @@ public class InquiryRestController {
 		return result;
 	}
 	
-	
+	/**
+	 * 문의글 답변 달기 API
+	 * @param inquiryId
+	 * @param reply
+	 * @return
+	 */
 	@RequestMapping("/reply")
 	public Map<String, Object> reply(
 			@RequestParam("inquiryId") int inquiryId,

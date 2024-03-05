@@ -21,6 +21,12 @@ public class OrderRestController {
 	@Autowired
 	private OrderBO orderBO;
 	
+	/**
+	 * 주문서 작성
+	 * @param list
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestBody List<Map<String, Object>> list,
@@ -39,6 +45,12 @@ public class OrderRestController {
 		return result;
 	}
 	
+	/**
+	 * 주문 현황 수정 API
+	 * @param orderId
+	 * @param status
+	 * @return
+	 */
 	@PostMapping("/order-update-status")
 	public Map<String, Object> updateStatus(
 			@RequestParam("orderId") int orderId,

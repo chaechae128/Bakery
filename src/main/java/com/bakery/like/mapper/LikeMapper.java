@@ -25,4 +25,6 @@ public interface LikeMapper {
 	
 	public List<Like> selectLikeByUserId(int userId);
 	
+	public void deleteListByUserId(int userId);
+	
 }

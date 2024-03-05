@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bakery.cart.bo.CartBO;
 import com.bakery.certification.bo.CertificationBO;
 import com.bakery.certification.bo.MailBO;
 import com.bakery.certification.domain.Certification;
 import com.bakery.common.EncryptUtils;
+import com.bakery.like.bo.LikeBO;
 import com.bakery.user.bo.UserBO;
 import com.bakery.user.domain.User;
 
@@ -31,6 +33,12 @@ public class UserRestController {
 	
 	@Autowired
 	private CertificationBO certificationBO;
+	
+	@Autowired
+	private LikeBO likeBO;
+
+	@Autowired
+	private CartBO cartBO;
 
 	/**
 	 * 아이디 중복확인 API
@@ -124,28 +132,6 @@ public class UserRestController {
 		return result;
 	}
 	
-//	/**
-//	 * 비밀번호 재설정 API
-//	 * @param loginId
-//	 * @param email
-//	 * @param name
-//	 * @return
-//	 */
-//	@RequestMapping("/reset-pw")
-//	public  Map<String, Object> resetPw(
-//			@RequestParam("loginId") String loginId,
-//			@RequestParam("email") String email,
-//			@RequestParam("name") String name) {
-//		
-//		
-//		Map<String, Object> result = new HashMap<>();
-//		return result;
-//	}
-	
-	
-	
-	
-	
 	/**
 	 * 비밀번호 재설정 위한 메일 보내기
 	 * @param email
@@ -153,7 +139,7 @@ public class UserRestController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("find-password")
+	@RequestMapping("/find-password")
 	public Map<String, Object> findPassword(
 			@RequestParam("email")String email,
 			@RequestParam("name") String name,
@@ -236,7 +222,7 @@ public class UserRestController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("update")
+	@RequestMapping("/update")
 	public Map<String, Object> update(
 			@RequestParam("upEmail") String upEmail,
 			@RequestParam("upNumber") String upNumber,
@@ -258,14 +244,22 @@ public class UserRestController {
 		return result;
 	}
 	
-	
+	/**
+	 * 회원 탈퇴
+	 * @param userId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("withdraw")
 	public Map<String, Object> withdraw(
 			@RequestParam("userId") int userId,
 			HttpSession session){
 		
-		//db delete
+		//db delete - user, like, cart, 에서 userId로 된 거 다 삭제
 		int count = userBO.deleteUserByUserId(userId);
+		likeBO.deleteListByUserId(userId);
+		cartBO.deleteListByUserId(userId);
+		
 		
 		session.removeAttribute("userId");
 		session.removeAttribute("userLoginId");

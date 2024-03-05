@@ -41,4 +41,10 @@
 			AND
 			`userId` = #{userId}
 	</delete>
+	
+	<delete id="deleteListByUserId" parameterType="int">
+		DELETE FROM `cart`
+		WHERE
+			`userId` = #{userId}
+	</delete>
 </mapper>

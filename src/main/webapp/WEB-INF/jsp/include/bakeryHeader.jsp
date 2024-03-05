@@ -35,7 +35,7 @@
 	<!--검색-->
 	<div class="d-flex  align-items-center">
 		<input type="text" class="d-flex justify-content-end search" id="search" name="search">
-		<button id="searchBtn" width="30px"><img
+		<button id="searchBtn" class="border-0"><img
 			src="https://img.freepik.com/premium-vector/magnifying-glass-icon-vector-illustration_230920-960.jpg"
 			alt="searchIcon" height="30px"></button>
 	</div>

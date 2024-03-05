@@ -161,6 +161,13 @@ public class UserController {
 		return "template/managerLayout";
 	}
 	
+	/**
+	 * 마이페이지 - 회원 정보
+	 * @param userId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/myPage") 
 	public String myPage(
 			@RequestParam("userId") int userId,

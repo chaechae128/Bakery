@@ -21,6 +21,12 @@ public class ProductController {
 	@Autowired
 	private ProductBO productBO;
 	
+	/**
+	 * 상품 리스트 화면
+	 * @param menu
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/product-list")
 	public String productList(
 			@RequestParam("menu") String menu,
@@ -32,6 +38,12 @@ public class ProductController {
 		return "template/bakeryLayout";
 	}
 	
+	/**
+	 * 검색된 상품 화면
+	 * @param search
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/product-search-list")
 	public String productSearch(
 			@RequestParam("search") String search,
@@ -43,6 +55,13 @@ public class ProductController {
 		return "template/bakeryLayout";
 	}
 	
+	/**
+	 * 상품 상세 화면
+	 * @param productId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/product-detail-view")
 	public String productDetail(
 			@RequestParam("productId") int productId,

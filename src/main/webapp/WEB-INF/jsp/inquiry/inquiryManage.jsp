@@ -6,18 +6,8 @@
 	<div class="col-10">
 		<div class="d-flex justify-content-between">
 			<h2>문의글 관리</h2>
-			<!--검색-->
-			<div class="d-flex  align-items-center">
-				<input type="text" class="d-flex justify-content-end search" id="order" name="order">
-				<button id="orderSearchBtn" class="btn"><img src="https://img.freepik.com/premium-vector/magnifying-glass-icon-vector-illustration_230920-960.jpg" alt="searchIcon" height="35px"></button>
-				<a href="/order/order-manage-view" class="btn bg-lemon">전체 조회</a>
-			</div>
-
 		</div>
 	</div>
-
-
-
 </div>
 <div class="w-100 mt-3">
 	<table class="table text-center">

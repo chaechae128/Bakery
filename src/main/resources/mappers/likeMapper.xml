@@ -36,6 +36,12 @@
 			`productId` = #{productId}
 	</delete>
 	
+	<delete id="deleteListByUserId" parameterType="int">
+		DELETE FROM `like`
+		WHERE
+			`userId` = #{userId}
+	</delete>
+	
 	<select id="selectLikeByUserId" parameterType="int" resultType="com.bakery.like.domain.Like">
 		SELECT * FROM `like`
 		WHERE

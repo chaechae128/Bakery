@@ -1,6 +1,5 @@
 package com.bakery.like;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,12 @@ public class LikeController {
 	@Autowired
 	private ProductBO productBO;
 	
+	/**
+	 * 나의 찜 목록 화면
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/like-list-view")
 	public String productManageView(Model model
 			,HttpSession session) {

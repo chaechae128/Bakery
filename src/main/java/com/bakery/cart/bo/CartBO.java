@@ -30,4 +30,8 @@ public class CartBO {
 		return cartMapper.deleteCartByUserIdProductId(userId, productId);
 	}
 	
+	public void deleteListByUserId(int userId) {
+		cartMapper.deleteListByUserId(userId);
+	}
+	
 }

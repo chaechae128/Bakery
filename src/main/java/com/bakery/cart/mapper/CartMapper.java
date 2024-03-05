@@ -24,4 +24,6 @@ public interface CartMapper {
 	public int deleteCartByUserIdProductId(
 			@Param("userId")int userId, 
 			@Param("productId")int productId);
+	
+	public void deleteListByUserId(int userId);
 }

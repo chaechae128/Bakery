@@ -23,6 +23,12 @@ public class LikeRestController {
 	@Autowired
 	private LikeBO likeBO;
 	
+	/**
+	 * 찜하기 API
+	 * @param productId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/like")
 	public Map<String, Object> like(
 			@RequestParam("productId") int productId,
@@ -46,6 +52,12 @@ public class LikeRestController {
 		
 		return result;
 	}
+	/**
+	 * 찜하기 취소 API
+	 * @param productId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/dislike")
 	public Map<String, Object> dislike(
 			@RequestParam("productId") int productId,

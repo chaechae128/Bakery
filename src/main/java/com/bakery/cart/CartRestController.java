@@ -19,6 +19,13 @@ public class CartRestController {
 	@Autowired
 	private CartBO cartBO;
 
+	/**
+	 * 장바구니 담기 API
+	 * @param productId
+	 * @param count
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("cart-in")
 	public Map<String, Object> cartIn(@RequestParam("productId") int productId, @RequestParam("count") int count,
 			HttpSession session) {
@@ -48,6 +55,12 @@ public class CartRestController {
 		return result;
 	}
 
+	/**
+	 * 장바구니 빼기 API
+	 * @param productId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/cart-out")
 	public Map<String, Object> delete(@RequestParam("productId") int productId, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");

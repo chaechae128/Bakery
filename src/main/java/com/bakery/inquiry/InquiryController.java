@@ -85,6 +85,12 @@ public class InquiryController {
 		return "template/managerLayout";
 	}
 	
+	/**
+	 * 문의글 답변달기 화면
+	 * @param model
+	 * @param inquiryId
+	 * @return
+	 */
 	@GetMapping("/inquiry-reply-view")
 	public String inquiryReplyView(Model model,
 			@RequestParam("inquiryId") int inquiryId) {

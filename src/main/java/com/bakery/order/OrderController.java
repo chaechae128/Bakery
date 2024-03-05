@@ -132,6 +132,12 @@ public class OrderController {
 		return "template/bakeryLayout";
 	}
 
+	/**
+	 * 내 주문 내역 화면
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/my-order-list-view")
 	public String myOrderListView(Model model, HttpSession session) {
 		int userId = (int) session.getAttribute("userId");
