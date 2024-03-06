@@ -46,6 +46,7 @@
 					            <option>상품 준비</option>
 					            <option>배송 중</option>
 					            <option>배송 완료</option>
+					            <option>주문 취소</option>
 					        </select>
 					        <button class="btn updateOrderBtn bg-lemon" id="${order.id}">수정</button>
 					        <input type="hidden" value="${order.id}" name="orderId" id="orderId">
@@ -60,14 +61,6 @@
 
 <script>
 	$(document).ready(function(){
-		/* let listSize = $("#table").data("list-size");
-		for(let i = 1; i<=listSize; i++) {
-			$("#updateOrderBtn"+i).on('click', function(){
-				let orderStatus =  $("#status"+i).val();
-				alert(orderStatus);
-				});//searchBtn	
-			
-		} */
 		
 		$(".updateOrderBtn").on('click', function(){
 			var orderId = parseInt($(this).next().val());

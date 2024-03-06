@@ -47,4 +47,6 @@
 			 `userId`= #{userId}
 	</select>
 	
+	
+	
 </mapper>
